@@ -443,7 +443,7 @@ LP_ENABLE_LOAD=0
 LP_ENABLE_PROXY=0
 LP_USER_ALWAYS=0
 LP_HOSTNAME_ALWAYS=0
-source $HOME/.liquidprompt
+[[ $- = *i* ]] && source $HOME/.liquidprompt
 #make sure the history is updated at every command
 shopt -s histappend
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
