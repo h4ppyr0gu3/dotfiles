@@ -3,11 +3,12 @@
     editor = /usr/bin/vim
     excludesfile = /Users/np/.gitignore_global
     pager=less -x4
+	autocrlf = input
 
 #}}}
 # user {{{
 [user]
-    email = npaolucci@atlassian.com
+    email = nick@durdn.com
     name = Nicola Paolucci
 
 #}}}
@@ -176,3 +177,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[credential]
+	helper = manager
