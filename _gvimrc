@@ -159,7 +159,9 @@ vmap <silent> <expr> p <sid>Repl()
 " Theme and Color {{{
 
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme codedark
+set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "font is antialiased Terminus
 " set noantialias
 " set guifont=Terminus\ (TTF):h14
@@ -231,7 +233,8 @@ nnoremap <leader>gt :Dispatch<CR>
 " Platform specific configuration {{{
 if has('gui_win64')
   set noantialias
-  set guifont=Terminus:h12
+  " set guifont=Terminus:h12
+  set guifont=Cascadia_Code:h12
   set lines=85
   nmap <silent> <leader>ev :e $HOME/_vimrc<CR>
   "overwrite mapping to reload the .vimrc"
@@ -239,7 +242,8 @@ if has('gui_win64')
 endif
 if has('gui_win32')
   set noantialias
-  set guifont=Terminus:h12
+  "set guifont=Terminus:h12
+  set guifont=Cascadia_Code:h12
   set lines=85
   "overwrite mapping to edit the .vimrc"
   nmap <silent> <leader>ev :e $HOME/_gvimrc<CR>
