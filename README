@@ -19,3 +19,4 @@ Install config tracking in your $HOME by running:
 
     git subtree <add/pull> --prefix .vim/pack/all/start/airline https://github.com/vim-airline/vim-airline master --squash
     git subtree <add/pull> --prefix .vim/pack/all/start/ctrlp https://github.com/ctrlpvim/ctrlp.vim master --squash
+    git subtree add --prefix .vim/pack/all/start/gitgutter https://github.com/airblade/vim-gitgutter master --squash
