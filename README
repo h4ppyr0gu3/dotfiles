@@ -9,9 +9,12 @@
 
 Install config tracking in your $HOME by running:
 
-  curl -Lks bit.do/config-install | /bin/bash
-  curl -Lks https://bitbucket.org/durdn/cfg/raw/master/.bin/install.sh | /bin/bash
+    curl -Lks bit.do/config-install | /bin/bash
+    curl -Lks https://bitbucket.org/durdn/cfg/raw/master/.bin/install.sh | /bin/bash
 
 ### Notes
 
-Cross-shell prompt is being changed to [Starship](https://starship.rs/).
+- Cross-shell prompt is being changed to [Starship](https://starship.rs/).
+- Update vim plugins as subtrees with:
+
+    git subtree pull --prefix .vim/pack/all/start/airline https://github.com/vim-airline/vim-airline main --squash
