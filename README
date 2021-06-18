@@ -17,4 +17,4 @@ Install config tracking in your $HOME by running:
 - Cross-shell prompt is being changed to [Starship](https://starship.rs/).
 - Update vim plugins as subtrees with:
 
-    git subtree pull --prefix .vim/pack/all/start/airline https://github.com/vim-airline/vim-airline main --squash
+    git subtree pull --prefix .vim/pack/all/start/airline https://github.com/vim-airline/vim-airline master --squash
