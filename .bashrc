@@ -341,15 +341,10 @@ if [ $(uname) == "Darwin" ]; then
 fi
 
 # }}}
-# MINGW32_NT-5.1 (winxp) specific config {{{
-if [ $(uname) == "MINGW32_NT-5.1" ]; then
-  alias ls='ls --color'
-  alias ll='ls -l --color'
-  alias la='ls -al --color'
-  alias less='less -R'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
+# Windows Terminal WSL2 specific config {{{
+if [[ $(uname -a) == *"microsoft-standard-WSL2"* ]]; then
+  # Load windows terminal proper colors
+  test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
 fi
 # }}}
 # Boot2docker specific config {{{
@@ -434,24 +429,15 @@ EOF
 fi
 # }}}
 # }}}
-# Liquid Prompt {{{
-LP_ENABLE_SVN=0
-LP_ENABLE_FOSSIL=0
-LP_ENABLE_BZR=0
-LP_ENABLE_BATT=0
-LP_ENABLE_LOAD=0
-LP_ENABLE_PROXY=0
-LP_USER_ALWAYS=0
-LP_HOSTNAME_ALWAYS=0
-[[ $- = *i* ]] && source $HOME/.liquidprompt
+# Starship Prompt {{{
 #make sure the history is updated at every command
 shopt -s histappend
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+eval "$(starship init bash)"
 # }}}
 # Java setup {{{
 # export PATH=$HOME/jdk1.8.0_31/bin:$PATH
 # export JAVA_HOME=$HOME/jdk1.8.0_31/
 # }}}
 # Set .bin in PATH and it should be first {{{
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin:/home/nick/.local/bin:$PATH
 # }}}
