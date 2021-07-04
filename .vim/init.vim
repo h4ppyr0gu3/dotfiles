@@ -1,1 +1,0 @@
-/Users/np/.cfg/.vimrc
