@@ -220,10 +220,6 @@ function scratch {
   gvim ~/Dropbox/$(openssl rand -base64 10 | tr -dc 'a-zA-Z').txt
 }
 
-# Convert a Confluence page on EAC to markdown
-function markdowneac {
-curl -Lks -u npaolucci https://@extranet.atlassian.com/rest/prototype/1/content/$1  | xmlstarlet sel -I -t -v "/content/body" | xmlstarlet unesc | pandoc -f html -t markdown --atx-headers --no-wrap --reference-links
-}
 # link all Go folders into projects folder
 function lngo {
   ls -1 | xargs -I{} ln -s $(pwd)/{} /Users/np/p/
@@ -362,70 +358,6 @@ if [[ -e /etc/resolv.conf && $(cat /etc/resolv.conf | grep domain | col 2 | head
   sudo route add -net 145.7.5.0 -netmask 255.255.255.0 10.33.88.1
   sudo route add -net 145.7.0.0 -netmask 255.255.255.0 10.33.88.1
   sudo route add -net 10.33.0.0 -netmask 255.255.0.0   10.33.88.1
-fi
-# }}}
-# Atlassian config {{{
-if [[ $(hostname | cut -d. -f1) == "reborn" ]]; then
-  export PATH="$HOME/dev/apps/maven2/bin:$PATH"
-  MAVEN_OPTS="-Xms256m -Xmx1g -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8"
-  export MAVEN_OPTS
-  source $HOME/.atlassian
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
-  function new_post {
-
-    NEW_POST_TITLE="$(echo $@ | sed -e "s/ /-/g")"
-    NEW_POST_DIR="$HOME/p/developer.atlassian.com/app/posts/$(date +"%Y/%m")/$NEW_POST_TITLE"
-    mkdir -p  $NEW_POST_DIR
-    cat >> $NEW_POST_DIR/index.md << "EOF"
----
-title: "Title"
-date: "2016-12-31 06:00"
-author: "npaolucci"
-categories: ["Docker","Git"]
----
-
-## Conclusions
-
-In any case if you found this interesting at all and want more why not follow
-me at [@durdn] or my awesome team at [@atlassiandev]?
-
-[@atlassiandev]: https://www.twitter.com/atlassiandev
-[@durdn]: https://www.twitter.com/durdn
-EOF
-    echo "Created: $NEW_POST_DIR/index.md"
-    git checkout develop
-    git checkout -b blog/$NEW_POST_TITLE
-    git add $NEW_POST_DIR/index.md
-  }
-
-  function new_post_worktree {
-
-    NEW_POST_TITLE="$(echo $@ | sed -e "s/ /-/g")"
-    cd $HOME/p/developer.atlassian.com
-    git checkout master
-    git worktree add -b blog/$NEW_POST_TITLE $NEW_POST_TITLE 
-    cd $NEW_POST_TITLE
-    NEW_POST_DIR="app/posts/$(date +"%Y/%m")/$NEW_POST_TITLE"
-    mkdir -p  $NEW_POST_DIR
-    cat >> $NEW_POST_DIR/index.md << "EOF"
----
-title: "Title"
-date: "2016-12-31 06:00"
-author: "npaolucci"
-categories: ["Docker","Git"]
----
-
-## Conclusions
-
-In any case if you found this interesting at all and want more why not follow
-me at [@durdn] or my awesome team at [@atlassiandev]?
-
-[@atlassiandev]: https://www.twitter.com/atlassiandev
-[@durdn]: https://www.twitter.com/durdn
-EOF
-    echo "Created: $NEW_POST_DIR/index.md"
-    git add $NEW_POST_DIR/index.md
-  }
 fi
 # }}}
 # }}}
