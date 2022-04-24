@@ -9,23 +9,24 @@ set $term alacritty
 set $menu wofi --show drun -I
 set $sysmenu " [l]ock [p]oweroff [r]eboot [s]leep "	
 set $workspace1 "1:"
-    set $workspace2 "2:"
-    #set $workspace3 "3:"
-    set $workspace3 "3:"
-    set $workspace4 "4:"
-    set $workspace5 "5:"
-    set $workspace6 "6:"
-    set $workspace7 "7:"
-    set $workspace8 "8:"
-    set $workspace9 "9:"
-    set $workspace0 "0:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:"
+set $workspace6 "6:"
+set $workspace7 "7:"
+set $workspace8 "8:"
+set $workspace9 "9:"
+set $workspace0 "0:"
 
 font "TerminessTTF Nerd Font 9"
 
 # set $wallpaper ~/.config/sway/images/wallpaper.jpg
 # # Default lockscreen background
 set $lockscreenbg /usr/share/backgrounds/custom/wallpaper_1.jpeg    
-set $wallpaper /usr/share/backgrounds/custom/h4ppyr0gu3.jpeg
+# set $wallpaper /usr/share/backgrounds/custom/h4ppyr0gu3.jpeg
+set $wallpaper /home/david/Downloads/ubuntu-22-04-lts-default-wallpaper.jpg
+
 
 include /etc/sway/config-vars.d/*
 
@@ -34,26 +35,34 @@ include /etc/sway/config-vars.d/*
 output * bg $wallpaper fill
 
 # NEC monitor
-output eDP-1 resolution 1366x768 position 0,1050 
-output HDMI-A-1 resolution 1680x1050 position 683,0 
+# output eDP-1 resolution 1366x768 position 0,1050
+# output HDMI-A-1 resolution 1680x1050 position 683,0
 
+# Acer monitor
+output eDP-1 resolution 1366x768 position 1500,1080
+output HDMI-A-1 resolution 1920x1080 position 0,0
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
-
-
 exec swayidle -w \
 timeout 300 'swaylock -f -e -i $lockscreenbg' \
 timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 before-sleep 'swaylock -f -e -i $lockscreenbg'
 
-for_window [class="firefox"] inhibit_idle focus
-for_window [title="/Firefox/"] inhibit_idle focus
-for_window [window_role="browser"] inhibit_idle focus
+for_window [class="^firefox$"] inhibit_idle focus
+for_window [title="Firefox$"] inhibit_idle focus
+for_window [workspace="2:"] inhibit_idle focus
+for_window [window_role="^browser$"] inhibit_idle focus
 for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="firefox"] inhibit_idle focus
+assign [window_role="^browser$"]: workspace $workspace2
+assign [class="Slack"]: workspace $workspace3
 
 ### Input configuration
 exec libinput-gestures-setup autostart start
+exec tlp start
+exec mako 
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 input "type:touchpad" {
 dwt enabled
@@ -144,56 +153,64 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+r mode "resize"
 bindsym XF86PowerOff mode $sysmenu
 bindsym $mod+Shift+m mode "move"
+bindsym $mod+period			gaps inner all plus 5
+bindsym $mod+comma			gaps inner all minus 5
+bindsym $mod+Shift+period	gaps inner all set 10
+bindsym $mod+Shift+comma	gaps inner all set 0
+bindsym $mod+Ctrl+$up move workspace to output up
+bindsym $mod+Ctrl+$down move workspace to output down
+bindsym $mod+Ctrl+$left move workspace to output left
+bindsym $mod+Ctrl+$right move workspace to output right
 
 mode "resize" {
   bindsym $left resize shrink width 10px
-  bindsym $down resize grow height 10px
-  bindsym $up resize shrink height 10px
-  bindsym $right resize grow width 10px
-  bindsym Left resize shrink width 10px
-  bindsym Down resize grow height 10px
-  bindsym Up resize shrink height 10px
-  bindsym Right resize grow width 10px
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 mode "move" {
   bindsym $mod+Tab focus right
 
-  bindsym Left  move left
-  bindsym Down  move down
-  bindsym Up    move up
-  bindsym Right move right
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
 
-  bindsym h     move left
-  bindsym j     move down
-  bindsym k     move up
-  bindsym l     move right
+    bindsym h     move left
+    bindsym j     move down
+    bindsym k     move up
+    bindsym l     move right
 
-  bindsym Shift+Left  move left 50px
-  bindsym Shift+Down  move down 50px
-  bindsym Shift+Up    move up 50px
-  bindsym Shift+Right move right 50px
+    bindsym Shift+Left  move left 50px
+    bindsym Shift+Down  move down 50px
+    bindsym Shift+Up    move up 50px
+    bindsym Shift+Right move right 50px
 
-  bindsym Shift+h     move left 50px
-  bindsym Shift+j     move down 50px
-  bindsym Shift+k     move up 50px
-  bindsym Shift+l     move right 50px
+    bindsym Shift+h     move left 50px
+    bindsym Shift+j     move down 50px
+    bindsym Shift+k     move up 50px
+    bindsym Shift+l     move right 50px
 
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+# back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 mode $sysmenu {
   bindsym l               exec swaylock -f -e -i $lockscreenbg
-  bindsym p               exec shutdown -P now
-  bindsym r               exec reboot -n
-  bindsym s               exec "systemctl suspend"; mode default
-  bindsym Return          mode "default"
-  bindsym Escape          mode "default"
-  bindsym XF86PowerOff    exec shutdown -P now
+    bindsym p               exec shutdown -P now
+    bindsym r               exec reboot -n
+    bindsym s               exec "systemctl suspend"; mode default
+    bindsym Return          mode "default"
+    bindsym Escape          mode "default"
+    bindsym XF86PowerOff    exec shutdown -P now
 }
 
 # Status Bar:
@@ -230,7 +247,3 @@ client.background $bg
 
 gaps inner 1
 gaps outer 1
-bindsym $mod+period			gaps inner all plus 5
-bindsym $mod+comma			gaps inner all minus 5
-bindsym $mod+Shift+period	gaps inner all set 10
-bindsym $mod+Shift+comma	gaps inner all set 0

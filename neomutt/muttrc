@@ -1,0 +1,21 @@
+set real_name='David Rogers'
+source ~/.config/neomutt/mail_aliases
+set alias_file=~/.config/neomutt/mail_aliases
+set imap_user=rogersdpdr@gmail.com
+set imap_pass=srwhslbuhavqvkih
+set folder=imaps://rogersdpdr@imap.gmail.com:993
+set from=rogersdpdr@gmail.com
+set smtp_pass=david250901
+set spoolfile=+INBOX
+set postponed = "+[GMail]/Drafts"# Activate caching, as it can greatly improve speed
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"# Disable saving outgoing mail since Gmail saves them by default. 
+set record = ""
+set imap_check_subscribed
+mailboxes       = +INBOX
+# for Gmail users
+set smtp_url = "smtps://rogersdpdr@smtp.gmail.com:587"
+set smtp_pass = "david250901"
+set smtp_authenticators = "login"
+set ssl_starttls = yes 
+set ssl_force_tls = yes

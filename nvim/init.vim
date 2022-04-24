@@ -30,6 +30,7 @@ set tags=./tags,tags;$HOME
 
 set splitright
 set splitbelow
+set scrolloff=6
 
 " Command Remapping
 " move line or visually selected block - alt+j/k
@@ -58,29 +59,38 @@ nnoremap gf :vert winc f<cr>
 " Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
+        \| exe "normal! g'\"" | endif
 endif
 
 " vim-plug plugins
 
 call plug#begin()
-    " Themes
-    Plug 'jacoborus/tender.vim'
-    " Aesthetic improvements
-    Plug 'mhinz/vim-startify'
-    Plug 'vim-airline/vim-airline'
-    Plug 'preservim/nerdtree'
-    Plug 'preservim/nerdcommenter'
-    Plug 'preservim/tagbar'
-    " Git
-    Plug 'tpope/vim-fugitive'
-    " Commands
-    Plug 'Konfekt/vim-alias'
-    " Syntax Highlighting Language Dependant  
-    Plug 'jlcrochet/vim-crystal'
-    Plug 'jlcrochet/vim-ruby' 
+  " Themes
+  Plug 'jacoborus/tender.vim'
+  " Aesthetic improvements
+  Plug 'mhinz/vim-startify'
+  Plug 'vim-airline/vim-airline'
+  Plug 'preservim/nerdtree'
+  Plug 'preservim/nerdcommenter'
+  Plug 'preservim/tagbar'
+  " Git
+  Plug 'tpope/vim-fugitive'
+  Plug 'duane9/nvim-rg'
+  " Commands
+  Plug 'Konfekt/vim-alias'
+  " Syntax Highlighting Language Dependant  
+  Plug 'jlcrochet/vim-crystal'
+  Plug 'jlcrochet/vim-ruby' 
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'ThePrimeagen/harpoon'
 call plug#end()
 
+lua require'harpoon'.setup { mark_branch = true }
+
+:nnoremap <silent> mf :lua require("harpoon.mark").add_file()<CR>
+:nnoremap <silent> ms :lua require("harpoon.ui").toggle_quick_menu()<CR>
+:nnoremap <silent> mn :lua require("harpoon.ui").nav_next()<CR>
+:nnoremap <silent> mp :lua require("harpoon.ui").nav_prev()<CR>
 " Aliases for vim-alias package in alias.vim
 
 " :Alias 		src	source\ ~/.config/nvim/init.vim
@@ -115,3 +125,4 @@ let g:NERDToggleCheckAllLines = 1
 colorscheme tender
 
 hi Normal guibg=NONE ctermbg=NONE
+hi LineNr ctermfg=132  guifg=#af5f87

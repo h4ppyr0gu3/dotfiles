@@ -7,26 +7,54 @@ export PATH="/home/david/.cargo/bin:$PATH"
 export PATH="/usr/sbin/:$PATH"
 export PATH="/home/david/.local/bin:$PATH"
 export MOZ_ENABLE_WAYLAND=1
+
+export FZF_BASE=/usr/sbin//fzf
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # ZSH SPECIFIC
 ZSH_THEME="robbyrussell"
-HYPHEN_INSENSITIVE="true"
-ENABLE_CORRECTION="true"
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# HYPHEN_INSENSITIVE="true"
+# ENABLE_CORRECTION="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd/mm/yyyy"
-plugins=(git zsh-autosuggestions sudo copyfile vi-mode)
+plugins=( fzf git zsh-autosuggestions sudo copyfile vi-mode fzf-zsh-plugin)
+DISABLE_FZF_KEY_BINDINGS="false"
 
 zstyle ':omz:update' frequency 10
+export ZSH="/home/david/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
+
+# FUNCTIONS
+# aur_install() {
+#   git clone $1
+#
+# }
+
+search() {
+  grep -nr --exclude-dir=node_modules --exclude-dir=coverage --exclude-dir=log --exclude-dir=public --exclude=tags "$1" /home/david/cooleaf-v2
+}
+
+acp() {
+  git status
+  vals=$(echo .)
+  vared -p "which files and directories to add: " vals
+  git add $vals 
+  msg=$(echo wip)
+  vared -p "commit message: " msg
+  git commit -m "$msg"
+  branch=$(git branch --show-current)
+  git push origin $branch
+}
+  
 
 # ALIASI
 alias src="source ~/.zshrc"
 alias upgrade="sudo pacman -Syu"
 alias ran="ranger"
 alias v="nvim"
+alias install="sudo pacman -Syu"
 
 alias bex="bundle exec "
 alias db:reset="rails db:drop db:create db:migrate db:seed"
@@ -54,6 +82,8 @@ sudo systemctl restart dnsmasq &&
 alacritty --working-directory ~/cooleaf-v2 -t rails_server -e rails s -b 0.0.0.0 &
 alacritty --working-directory ~/cooleaf-v2 -t sidekiq -e bundle exec sidekiq &
 alacritty --working-directory ~/cooleaf-v2 -t rails_console -e rails c &"
+alias pod="sudo podman"
 
 # INITIALIZE
 eval "$(rbenv init -)"
+
