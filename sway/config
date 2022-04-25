@@ -27,7 +27,6 @@ set $lockscreenbg /usr/share/backgrounds/custom/wallpaper_1.jpeg
 # set $wallpaper /usr/share/backgrounds/custom/h4ppyr0gu3.jpeg
 set $wallpaper /home/david/Downloads/ubuntu-22-04-lts-default-wallpaper.jpg
 
-
 include /etc/sway/config-vars.d/*
 
 # Wallpaper

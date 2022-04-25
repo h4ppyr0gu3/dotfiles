@@ -1,0 +1,8 @@
+#!/bin/bash
+
+var=$(sudo podman images --all | grep postgres | awk '{ print $3}')
+
+sudo podman run \
+  -e POSTGRES_PASSWORD=davidr \
+  -e PGDATA=/home/postgres/data \
+  -p 5432:5432 -v pg13:/home/postgres/data -d $var

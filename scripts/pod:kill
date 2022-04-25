@@ -1,0 +1,7 @@
+#!/bin/bash
+
+var=$(sudo podman ps -a | fzf | awk '{ print $1 } ')
+
+sudo podman kill $var
+
+sudo podman rm $var

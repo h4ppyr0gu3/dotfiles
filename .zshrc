@@ -3,6 +3,7 @@ export ZSH="/home/david/.oh-my-zsh"
 export EDITOR='nvim'
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/var/lib/flatpak/exports/bin:$PATH"
+export PATH="/home/david/.config/scripts:$PATH"
 export PATH="/home/david/.cargo/bin:$PATH"
 export PATH="/usr/sbin/:$PATH"
 export PATH="/home/david/.local/bin:$PATH"
@@ -38,10 +39,10 @@ search() {
 
 acp() {
   git status
-  vals=$(echo .)
+  vals=$(echo )
   vared -p "which files and directories to add: " vals
   git add $vals 
-  msg=$(echo wip)
+  msg=$(echo )
   vared -p "commit message: " msg
   git commit -m "$msg"
   branch=$(git branch --show-current)
@@ -83,7 +84,12 @@ alacritty --working-directory ~/cooleaf-v2 -t rails_server -e rails s -b 0.0.0.0
 alacritty --working-directory ~/cooleaf-v2 -t sidekiq -e bundle exec sidekiq &
 alacritty --working-directory ~/cooleaf-v2 -t rails_console -e rails c &"
 alias pod="sudo podman"
-
+alias pod:clean="sudo podman system prune"
+alias sys:logout="swaymsg exit"
 # INITIALIZE
 eval "$(rbenv init -)"
 
+# # nnn
+# export NNN_FCOLORS='0000e63100000000000000000'
+# export NNN_FIFO='/tmp/nnn.fifo'
+# export NNN_PLUG='o:fzopen;m:nmount;x:!chmod +x $nnn'
