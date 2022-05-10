@@ -23,14 +23,16 @@ font "TerminessTTF Nerd Font 9"
 
 # set $wallpaper ~/.config/sway/images/wallpaper.jpg
 # # Default lockscreen background
-set $lockscreenbg /usr/share/backgrounds/custom/wallpaper_1.jpeg    
 # set $wallpaper /usr/share/backgrounds/custom/h4ppyr0gu3.jpeg
-set $wallpaper /home/david/Downloads/ubuntu-22-04-lts-default-wallpaper.jpg
+# set $wallpaper /home/david/Downloads/ubuntu-22-04-lts-default-wallpaper.jpg
+
+set $wallpaper $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n 1)
 
 include /etc/sway/config-vars.d/*
 
 # Wallpaper
 # output * bg /usr/share/backgrounds/custom/wallpaper_1.jpeg fill
+
 output * bg $wallpaper fill
 
 # NEC monitor
@@ -44,9 +46,9 @@ output HDMI-A-1 resolution 1920x1080 position 0,0
 
 ### Idle configuration
 exec swayidle -w \
-timeout 300 'swaylock -f -e -i $lockscreenbg' \
+timeout 300 'swaylock -f -e -i $wallpaper' \
 timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-before-sleep 'swaylock -f -e -i $lockscreenbg'
+before-sleep 'swaylock -f -e -i $wallpaper'
 
 for_window [class="^firefox$"] inhibit_idle focus
 for_window [title="Firefox$"] inhibit_idle focus
@@ -78,7 +80,7 @@ xkb_options caps:escape
 }
 
 ### Key bindings
-bindsym $mod+Escape exec swaylock -f -e -i $lockscreenbg
+bindsym $mod+Escape exec swaylock -f -e -i $wallpaper
 bindsym Print exec grim ~/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 bindsym $mod+Print exec grim -g "$(slurp)" ~/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 bindsym Mod1+Shift+f exec firefox
@@ -203,7 +205,7 @@ mode "move" {
 }
 
 mode $sysmenu {
-  bindsym l               exec swaylock -f -e -i $lockscreenbg
+  bindsym l               exec swaylock -f -e -i $wallpaper
     bindsym p               exec shutdown -P now
     bindsym r               exec reboot -n
     bindsym s               exec "systemctl suspend"; mode default
@@ -216,8 +218,7 @@ mode $sysmenu {
 bar {
   position bottom
     font "JetBrains Mono 11"
-    separator_symbol "|" 
-    status_command while /home/david/.config/sway/status_bar.sh; do sleep 1; done
+    status_command while $HOME/.config/sway/status_bar.sh; do sleep 1; done
     colors {
       statusline #ffffff
         background #00000000
