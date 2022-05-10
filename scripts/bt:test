@@ -1,0 +1,8 @@
+#!/bin/bash
+
+bluetoothctl power on >> /dev/null
+
+paired=$(bluetoothctl paired-devices)
+
+echo $paired | awk '{ print $1=$2=""; print $0}' | fzf
+

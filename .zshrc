@@ -13,6 +13,8 @@ export FZF_BASE=/usr/sbin//fzf
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export PATH="$HOME/.crenv/bin:$PATH"
+eval "$(crenv init -)"
 
 # ZSH SPECIFIC
 ZSH_THEME="robbyrussell"
@@ -40,7 +42,7 @@ search() {
 acp() {
   git status
   vals=$(echo )
-  vared -p "which files and directories to add: " vals
+  vared -p "files and directories to add: " vals
   git add $vals 
   msg=$(echo )
   vared -p "commit message: " msg

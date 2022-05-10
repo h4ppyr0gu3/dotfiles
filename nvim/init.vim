@@ -71,8 +71,11 @@ call plug#begin()
   Plug 'mhinz/vim-startify'
   Plug 'vim-airline/vim-airline'
   Plug 'preservim/nerdtree'
+  Plug 'slim-template/vim-slim'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/tagbar'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   " Git
   Plug 'tpope/vim-fugitive'
   Plug 'duane9/nvim-rg'
