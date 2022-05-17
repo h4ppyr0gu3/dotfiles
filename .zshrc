@@ -1,12 +1,14 @@
 # EXPORTS (ruby rust node flatpak)
-export ZSH="/home/david/.oh-my-zsh"
+# export HOME="/home/david"
+export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nvim'
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/var/lib/flatpak/exports/bin:$PATH"
-export PATH="/home/david/.config/scripts:$PATH"
-export PATH="/home/david/.cargo/bin:$PATH"
+export PATH="$HOME/.config/scripts:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/usr/sbin/:$PATH"
-export PATH="/home/david/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.mix/escripts:$PATH"
 export MOZ_ENABLE_WAYLAND=1
 
 export FZF_BASE=/usr/sbin//fzf
@@ -75,6 +77,12 @@ alias dns:restart="sudo systemctl restart dnsmasq"
 alias bt:on="bluetoothctl power on"
 alias bt:off="bluetoothctl power off"
 alias bt="bluetoothctl"
+
+alias ls="exa"
+alias tree="exa --tree"
+alias cat="bat"
+
+alias co="git checkout"
 
 alias clf:beef="cd cooleaf-v2 && nvm use 8 && npm install && npm run watch"
 alias clf:fe="cd project-atlanta && nvm use 14 && npm install && npm run start:web"
