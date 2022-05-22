@@ -76,6 +76,9 @@ call plug#begin()
   Plug 'preservim/tagbar'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'elixir-editors/vim-elixir'
+  Plug 'jparise/vim-graphql'
+  Plug 'lilyinstarlight/vim-sonic-pi'
   " Git
   Plug 'tpope/vim-fugitive'
   Plug 'duane9/nvim-rg'

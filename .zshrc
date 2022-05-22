@@ -79,9 +79,8 @@ alias bt:off="bluetoothctl power off"
 alias bt="bluetoothctl"
 
 alias ls="exa"
+alias la="exa -la"
 alias tree="exa --tree"
-alias cat="bat"
-
 alias co="git checkout"
 
 alias clf:beef="cd cooleaf-v2 && nvm use 8 && npm install && npm run watch"
