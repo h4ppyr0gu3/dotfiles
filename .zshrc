@@ -76,7 +76,7 @@ alias dns:restart="sudo systemctl restart dnsmasq"
 
 alias bt:on="bluetoothctl power on"
 alias bt:off="bluetoothctl power off"
-alias bt="bluetoothctl"
+alias btctl="bluetoothctl"
 
 alias ls="exa"
 alias la="exa -la"
