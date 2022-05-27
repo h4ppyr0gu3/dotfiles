@@ -7,22 +7,22 @@ main () {
 
 function volume_notification() {
   makoctl dismiss
-  notify-send -u "critical" -t 2000 -a "Vol" "$(echo -e "$(volume_bar)")"
+  notify-send -u "critical" -t 2000 -h "int:value:$volume_integer" -a "Vol" "volume"
 }
 
-function volume_bar() {
-  value=$((($volume_integer) / 5))
-  string=""
-  for i in {1..20} 
-  do
-    if [ $i -le $value ] ; then
-      string+="█"
-    else
-      string+="_"
-    fi
-  done
-  echo [$string] $speaker_volume_emoji
-}
+# function volume_bar() {
+#   value=$((($volume_integer) / 5))
+#   string=""
+#   for i in {1..20}
+#   do
+#     if [ $i -le $value ] ; then
+#       string+="█"
+#     else
+#       string+="_"
+#     fi
+#   done
+#   echo [$string] $speaker_volume_emoji
+# }
 
 default_sink=$(pactl get-default-sink)
 volume_unformatted=$(pactl get-sink-volume $default_sink)
@@ -41,7 +41,8 @@ function change_volume() {
       volume_notification;;
     mute)
       pactl set-sink-mute @DEFAULT_SINK@ 1
-      volume_notification;;
+      makoctl dismiss
+      notify-send -u "critical" -t 2000 -h int:value:0 -a "Volume" "Volume";;
     *)
       notify-send "unknown volume.sh argument";;
   esac
