@@ -5,29 +5,7 @@ main () {
   change_volume
 }
 
-function volume_notification() {
-  makoctl dismiss
-  notify-send -u "critical" -t 2000 -h "int:value:$volume_integer" -a "Vol" "volume"
-}
-
-# function volume_bar() {
-#   value=$((($volume_integer) / 5))
-#   string=""
-#   for i in {1..20}
-#   do
-#     if [ $i -le $value ] ; then
-#       string+="█"
-#     else
-#       string+="_"
-#     fi
-#   done
-#   echo [$string] $speaker_volume_emoji
-# }
-
 default_sink=$(pactl get-default-sink)
-volume_unformatted=$(pactl get-sink-volume $default_sink)
-volume_percentage=$(echo $volume_unformatted | awk '{print $5}' )
-volume_integer=$(echo $volume_percentage | sed 's/%//' )
 
 function change_volume() {
   case $command in 
@@ -46,6 +24,12 @@ function change_volume() {
     *)
       notify-send "unknown volume.sh argument";;
   esac
+}
+
+function volume_notification() {
+  volume_integer=$(pactl get-sink-volume $default_sink | awk '{print $5}' | sed 's/%//')
+  makoctl dismiss
+  notify-send -t 2000 -h "int:value:$volume_integer" -a "Vol" "Volume"
 }
 
 main "$@"
