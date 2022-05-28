@@ -252,15 +252,15 @@ bar {
     }
 }
 
-# Gaps
+# Gaps and borders
 bindsym $mod+period			gaps inner all plus 5
 bindsym $mod+comma			gaps inner all minus 5
 bindsym $mod+Shift+period	gaps inner all set 10
 bindsym $mod+Shift+comma	gaps inner all set 0
 gaps inner 1
 gaps outer 1
-
-# Window borders 
+smart_gaps on
+hide_edge_borders smart
 default_border pixel 1 
 
 # Set colors
