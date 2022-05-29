@@ -244,9 +244,9 @@ bar {
     status_command while $HOME/.config/sway/status_bar.sh; do sleep 1; done
     colors {
       statusline #ffffff
-        background #00000000
-        inactive_workspace #323232AA #00000000 #5c5c5cAA
-        active_workspace #03CEF4 #00000000 #5c5c5cAA
+        background #000000AA
+        inactive_workspace #323232AA #000000AA #5c5c5cAA
+        active_workspace #03CEF4 #000000AA #5c5c5cAA
         urgent_workspace #D76A45 #F43753AA #ffffff
         focused_workspace #03Cef4 #03Cef4aa #ffffff
     }
