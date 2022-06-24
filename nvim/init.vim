@@ -23,11 +23,13 @@ set tags=./tags,tags;$HOME
 set splitright
 set splitbelow
 set scrolloff=6
+set noswapfile
 " set foldmethod=syntax " automatically fold all blocks
 filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 
 call plug#begin()
+Plug 'joshdick/onedark.vim'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
@@ -70,7 +72,7 @@ nnoremap <CR> :a<CR><CR>.<CR>
 command! MakeTags !ctags\ -R\ .
 nnoremap mt :MakeTags<CR>
 " open file in a text by placing text and gf
-nnoremap gf :vert winc f<cr> 
+" nnoremap <silent> gf :vert winc f<CR>
 " copy filepath or working directory to clipboard
 :nnoremap <silent> yf :let @+=expand('%:p')<CR>
 :nnoremap <silent> yd :let @+=expand('%:p:h')<CR>
@@ -84,9 +86,9 @@ nnoremap <silent> mf :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent> ms :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <silent> mn :lua require("harpoon.ui").nav_next()<CR>
 nnoremap <silent> mp :lua require("harpoon.ui").nav_prev()<CR>
-nnoremap <silent> lf :Lf<CR>
-nnoremap <silent> tb :TagbarToggle<CR>
 
+nnoremap <leader>lf :Lf<CR>
+nnoremap <leader>tb :TagbarToggle<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -107,6 +109,7 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 colorscheme tender
+" colorscheme onedark
 
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr ctermfg=132  guifg=#af5f87

@@ -62,8 +62,12 @@ alias ran="ranger"
 alias v="nvim"
 alias install="sudo pacman -Syu"
 
-alias bex="bundle exec "
+alias bex="bundle exec"
+alias rails="bundle exec rails"
+alias sidekiq="bundle exec sidekiq"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
+alias rspec="bundle exec rspec"
+alias db:clf="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:13"
 
 alias hdd:status="sudo hdparm -C /dev/sda"
 alias hdd:standby="sudo hdparm -Y /dev/sda"
@@ -96,10 +100,13 @@ alacritty --working-directory ~/cooleaf-v2 -t rails_console -e rails c &"
 alias pod="sudo podman"
 alias pod:clean="sudo podman system prune"
 alias sys:logout="swaymsg exit"
+alias ram:clean="su -c sync; echo 1 > /proc/sys/vm/drop_caches"
+
 # INITIALIZE
 # # nnn
 # export NNN_FCOLORS='0000e63100000000000000000'
 # export NNN_FIFO='/tmp/nnn.fifo'
 # export NNN_PLUG='o:fzopen;m:nmount;x:!chmod +x $nnn'
+. /opt/asdf-vm/asdf.sh
 . /opt/asdf-vm/asdf.sh
 . /opt/asdf-vm/asdf.sh

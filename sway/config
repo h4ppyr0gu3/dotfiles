@@ -43,8 +43,17 @@ output * bg $wallpaper fill
 # output HDMI-A-1 resolution 1680x1050 position 683,0
 
 # Acer monitor
-output eDP-1 resolution 1366x768 position 300,1080
-output HDMI-A-1 resolution 1920x1080 position 0,0
+# output eDP-1 resolution 1366x768 position 300,1080
+# output HDMI-A-1 resolution 1920x1080 position 0,0
+
+# Work moitor
+# output eDP-1 disable
+# output HDMI-A-1 resolution 2560x1440 position 0,0
+
+# Work moitor
+output eDP-1 resolution 1366x768 position 512,1440
+output HDMI-A-1 resolution 2560x1440 position 0,0
+
 
 ### Idle configuration
 exec swayidle -w \
@@ -79,7 +88,7 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 # Input options
 # List inputs by running: swaymsg -t get_inputs
 input "type:touchpad" {
-  dwt enabled
+  dwt disabled
   tap enabled 
   natural_scroll enabled
   middle_emulation enabled
