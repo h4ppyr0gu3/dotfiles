@@ -30,30 +30,9 @@ DISABLE_FZF_KEY_BINDINGS="false"
 
 zstyle ':omz:update' frequency 10
 export ZSH="/home/david/.oh-my-zsh"
+
 source $ZSH/oh-my-zsh.sh
-
-# FUNCTIONS
-# aur_install() {
-#   git clone $1
-#
-# }
-
-search() {
-  grep -nr --exclude-dir=node_modules --exclude-dir=coverage --exclude-dir=log --exclude-dir=public --exclude=tags "$1" /home/david/cooleaf-v2
-}
-
-acp() {
-  git status
-  vals=$(echo )
-  vared -p "files and directories to add: " vals
-  git add $vals 
-  msg=$(echo )
-  vared -p "commit message: " msg
-  git commit -m "$msg"
-  branch=$(git branch --show-current)
-  git push origin $branch
-}
-  
+source ~/.config/functions.sh  
 source ~/.config/alias.sh
 
 # INITIALIZE
@@ -62,3 +41,8 @@ source ~/.config/alias.sh
 # export NNN_FIFO='/tmp/nnn.fifo'
 # export NNN_PLUG='o:fzopen;m:nmount;x:!chmod +x $nnn'
 
+# FUNCTIONS
+# aur_install() {
+#   git clone $1
+#
+# }
