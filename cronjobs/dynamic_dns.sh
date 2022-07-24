@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /home/david/.config/.env
+
 ip_address=$(curl -4 icanhazip.com)
 
 existing_data=$(
@@ -23,7 +25,10 @@ curl -X PUT $cloudflare_update_url \
 status=$(echo $update_status | jq '.success')
 
 if $status; then
-  exit(0)
+  echo success
+  exit
 fi
+
+echo failure
 
 # send slack notification 
