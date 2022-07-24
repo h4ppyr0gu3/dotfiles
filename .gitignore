@@ -32,4 +32,10 @@ cef_user_data/**/*
 gtk-3.0/**/*
 monero-project/**/*
 picom/**/*
-
+stuntrally/**/*
+.env
+Clementine/**/*
+Insomnia/**/*
+audacious/**/*
+autostart/slack.desktop
+qmmp/**/*
