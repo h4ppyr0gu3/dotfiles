@@ -5,7 +5,6 @@ acp() {
   array=("${(@s/ /)string}")
   for el in ${array[*]};
   do 
-    echo $el
     git add $el
   done
   msg=""
