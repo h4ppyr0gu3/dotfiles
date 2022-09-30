@@ -1,9 +1,9 @@
 {
   "telemetry.enableTelemetry": false,
   "editor.minimap.enabled": false,
-  "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code Regular', 'Terminus (TTF) for Windows', Consolas, 'Courier New', monospace",
-//   "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code Regular', 'Terminus (TTF) for Windows', Consolas, 'Courier New', monospace",
-  "editor.fontSize": 15,
+  //   "editor.fontFamily": "'Jetbrains Mono', 'Cascadia Code', 'Fira Code Regular', 'Terminus (TTF) for Windows', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Fira Code Regular', 'Terminus (TTF) for Windows', Consolas, 'Courier New', monospace",
+  "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -15,7 +15,8 @@
   // "terminal.integrated.shell.windows": "C:\\WINDOWS\\Sysnative\\WindowsPowerShell\\v1.0\\powershell.exe",
   "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe",
   "terminal.integrated.scrollback": 10000,
-//   "terminal.integrated.fontFamily": "Fira Code Medium",
+  "terminal.integrated.shellIntegration.enabled": true,
+  //   "terminal.integrated.fontFamily": "Fira Code Medium",
   "terminal.integrated.fontFamily": "CaskaydiaCove NF",
   "terminal.integrated.fontSize": 14,
   "explorer.confirmDelete": false,
@@ -68,8 +69,8 @@
       "after": ["<Esc>"]
     },
     {
-        "before": ["j", "k"],
-        "after": ["<Esc>"]
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
     }
   ],
   "workbench.editor.enablePreview": false,
@@ -114,13 +115,30 @@
       "putty": "dash.local"
     }
   ],
-"vetur.format.options.tabSize": 4,
-"editor.detectIndentation": false,
-"python.showStartPage": false,
-"workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
+  "vetur.format.options.tabSize": 4,
+  "editor.detectIndentation": false,
+  "python.showStartPage": false,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "svelte.enable-ts-plugin": true,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "python": true
 },
-"security.workspace.trust.untrustedFiles": "open"
+"go.toolsManagement.autoUpdate": true
   // "gopls": {
   //   // Add parameter placeholders when completing a function.
   //   "usePlaceholders": true,
