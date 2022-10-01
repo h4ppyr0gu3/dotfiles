@@ -2,6 +2,16 @@
 " Author: Nicola Paolucci <nick@durdn.com>
 " Source: https://bitbucket.org/durdn/cfg/src
 
+" Runtime Path {{{
+if has('nvim')
+    set packpath=$HOME/.local/share/nvim/site
+endif
+if has('gui_win64') || has('gui_win32')
+    "set packpath+=$HOME/_vim
+    " set runtimepath=$HOME/_vim,$HOME/vimfiles,$VIMRUNTIME/vimfiles,$VIMRUNTIME,$VIMRUNTIME/vimfiles/after
+    "set runtimepath+=$HOME/_vim
+endif
+" End Runtime Path }}}
 " Basic settings and variables"{{{
 filetype plugin indent on
 syntax on
@@ -57,7 +67,11 @@ nnoremap ; :
 nnoremap <Space> za
 vnoremap <Space> za
 "reload the .vimrc
-nmap <silent> <leader>rv :source ~/.vimrc<CR>
+if has('nvim')
+    nmap <silent> <leader>rv :source $HOME/AppData/Local/nvim/init.vim<CR>
+else
+    nmap <silent> <leader>rv :source $HOME/_gvimrc<CR>
+endif
 "show spaces"
 nmap <silent> <leader>s :set nolist!<CR>
 "show line numbers"
@@ -91,6 +105,43 @@ nmap <silent> <leader>x :hid<CR>
 nmap <leader>pr :%s/\`\([^`]\+\)`/\<span class=\"text codecolorer\"\>\1<\/span>/p<cr>:set nohlsearch<CR>
 nmap <leader>pu :%s/<span.\{-}>\(.\{-}\)<\/span>/`\1`/p<cr>:set nohlsearch<CR>
 " }}}
+" Code on retina {{{
+nnoremap <silent> <leader>9 :call CodeOnRetina()<CR>
+let g:retina_code_environment_on = 0
+function! CodeOnRetina()
+  set fuopt=maxvert
+  if g:retina_code_environment_on
+    if has('gui_macvim')
+      set noantialias|set gfn=Terminus\ (TTF):h14|set co=80
+    else
+      set noantialias|set gfn=Terminus\ (TTF):h14|set co=80
+    endif
+    let g:retina_code_environment_on = 0
+  else
+    set antialias|set gfn=Inconsolata:h16|set co=80
+    let g:retina_code_environment_on = 1
+  endif
+endfunction
+" }}}
+" Writing environment {{{
+nnoremap <silent> <leader>0 :call ToggleWritingEnvironment()<CR>
+let g:writing_environment_on = 0
+function! ToggleWritingEnvironment()
+  set fuopt=maxvert
+  if g:writing_environment_on
+    if has('gui_macvim')
+      set noantialias|set gfn=Terminus\ (TTF):h14|set co=80
+    else
+      set noantialias|set gfn=Terminus\ (TTF):h14|set co=80
+    endif
+    let g:writing_environment_on = 0
+  else
+    set antialias|set gfn=Inconsolata:h22|set co=180
+"    set foldcolumn=12
+    let g:writing_environment_on = 1
+  endif
+endfunction
+" }}}
 " Magic c-space OmniComplete "{{{
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
@@ -117,6 +168,10 @@ vmap <silent> <expr> p <sid>Repl()
 set background=dark
 "colorscheme solarized
 colorscheme codedark
+"font is antialiased Terminus
+" set noantialias
+" set guifont=Terminus\ (TTF):h14
+" set guifont=Hack:h14
 "draw vertical column at 80
 if v:version > 703
   set colorcolumn=80
@@ -127,8 +182,11 @@ endif
 " Edit the .bashrc"
 nmap <silent> <leader>eb :e ~/.bashrc<CR>
 " Edit the .vimrc"
-nmap <silent> <leader>ev :e $HOME/.nvim/init.vim<CR>
-nmap <silent> <leader>rv :source $HOME/.nvim/init.vim<CR>
+if has('nvim')
+    nmap <silent> <leader>ev :e ~/AppData/Local/nvim/init.vim<CR>
+else
+    nmap <silent> <leader>ev :e ~/_gvimrc<CR>
+endif
 " Edit the .gitconfig"
 nmap <silent> <leader>eg :e ~/.gitconfig<CR>
 " Edit the .tmux.conf"
@@ -137,8 +195,8 @@ nmap <silent> <leader>et :e ~/.tmux.conf<CR>
 nmap <silent> <leader>el :e ~/.slate<cr>
 " Open a scratch file
 nmap <silent> <leader>eh :e ~/scratch.txt<CR>
-" Open color theme
-nmap <silent> <leader>ec :e ~/.vim/pack/colors/opt/solarized/colors/solarized.vim<CR>
+" Open dev tools content folder
+nmap <silent> <leader>ec :e ~/_vim/pack/colors/opt/solarized/colors/solarized.vim<CR>
 " End Quick editing  }}}
 " Plugins configuration"{{{
 
@@ -183,15 +241,40 @@ nnoremap <leader>gt :Dispatch<CR>
 " }}}
 " End Plugins configuration"}}}
 " Platform specific configuration {{{
-if has('win64') || has('win32')
+if has('gui_win64')
+  set noantialias
+  " set guifont=Terminus:h12
+  set guifont=Cascadia_Code:h12
+  set lines=85
+  nmap <silent> <leader>ev :e $HOME/_vimrc<CR>
+  "overwrite mapping to reload the .vimrc"
+  if has('nvim')
+      nmap <silent> <leader>rv :source ~/AppData/Local/nvim/init.vim<CR>
+  else
+      nmap <silent> <leader>rv :source $HOME/_gvimrc<CR>
+  endif
+endif
+if has('gui_win32')
+  set noantialias
+  "set guifont=Terminus:h12
+  set guifont=Cascadia_Code:h12
   set lines=85
   "overwrite mapping to edit the .vimrc"
-  nmap <silent> <leader>ev :e $HOME/AppData/Local/nvim/init.vim<CR>
+  nmap <silent> <leader>ev :e $HOME/_gvimrc<CR>
   "overwrite mapping to reload the .vimrc"
-  nmap <silent> <leader>rv :source $HOME/AppData/Local/nvim/init.vim<CR>
-  " Open color theme
-  nmap <silent> <leader>ec :e $HOME/AppData/Local/nvim/pack/colors/opt/codedark/colors<CR>
+  if has('nvim')
+      nmap <silent> <leader>rv :source ~/AppData/Local/nvim/init.vim<CR>
+  else
+      nmap <silent> <leader>rv :source $HOME/_gvimrc<CR>
+  endif
 endif
-" Enable CTRL-c CTRL-v in Windows
-:source $VIMRUNTIME/mswin.vim
+if has("gui_macvim")
+  set fuopt=maxvert
+  set noantialias
+  set guifont=Terminus\ (TTF):h14
+  "set guifont=Hack:h14
+  command! ToggleFullScreen if &fu|set noantialias|set gfn=Terminus\ (TTF):h14|set co=80|set nofu|else|set antialias|set gfn=Inconsolata:h22|set co=100|set fu|endif
+  an <silent> Window.Toggle\ Full\ Screen\ Mode :ToggleFullScreen<CR>
+endif
+
 " End Platform specific configuration }}}
