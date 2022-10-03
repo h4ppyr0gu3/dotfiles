@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+bluetoothctl power on >> /dev/null
+select=$(bluetoothctl devices | awk '{print $3}' | fzf)
+
+  if [[ $select = "" ]]; then 
+    exit 1
+  fi
+
+  MAC=$(bluetoothctl devices | grep $select | awk {'print $2'})
+  connected=$(bluetoothctl info $MAC | grep Connected: | awk '{print $2}')
+
+  if [[ $connected = no ]]; then 
+    notify-send -a "BT" "Attempting to connect to $select"
+    bluetoothctl connect $MAC >> /dev/null || notify-send -a "BT" "Failed to Connect"
+  else
+    notify-send -a "BT" "Attempting to disconnect $select"
+    bluetoothctl disconnect $MAC >> /dev/null
+    bluetoothctl power off >> /dev/null
+  fi
