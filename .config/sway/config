@@ -9,7 +9,7 @@ set $right l
 set $term alacritty
 set $menu  wofi -m -G --show drun -i -I -W 500
 set $workspace1 "1:"
-set $workspace2 "2:⚛"
+set $workspace2 "2:"
 set $workspace3 "3:"
 set $workspace4 "4:⚜"
 set $workspace5 "5:"
@@ -17,20 +17,19 @@ set $workspace6 "6:"
 set $workspace7 "7:"
 set $workspace8 "8:"
 set $workspace9 "9:☘"
-set $workspace11 "1:"
-set $workspace12 "2:☯"
-set $workspace13 "3:®"
-set $workspace14 "4:☢"
-set $workspace15 "5:☠"
-set $workspace16 "6:☸"
-set $workspace17 "7:♰"
-set $workspace18 "8:☺"
-set $workspace19 "9:♔"
+set $workspace10 "10:☢"
+# set $workspace11 "1:⚛"
+# set $workspace12 "2:☯"
+# set $workspace13 "3:®"
+# set $workspace14 "4:☢"
+# set $workspace15 "5:☠"
+# set $workspace16 "6:☸"
+# set $workspace17 "7:♰"
+# set $workspace18 "8:☺"
+# set $workspace19 "9:♔"
 
 set $wallpaper /home/david/.config/wallpapers/zim_ripple.jpg
 set $lockscreen $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n 1)
-
-# XDG_CURRENT_DESKTOP=sway
 
 # SET DISPLAY BEGIN
 set $display1 eDP-1
@@ -61,10 +60,13 @@ for_window {
   [window_role="pop-up"] floating enable
   [window_role="bubble"] floating enable
   [window_role="dialog"] floating enable
+  [app_id="org.gnome.Calculator"] floating enable
+
+  [class="^.*"] inhibit_idle fullscreen
+
   [class="^firefox$"] inhibit_idle focus
   [title="Firefox$"] inhibit_idle focus
   [window_role="^browser$"] inhibit_idle focus
-  [class="^.*"] inhibit_idle fullscreen
   [app_id="firefox"] inhibit_idle focus
 }
 
@@ -102,24 +104,24 @@ input "type:keyboard" {
 # Set outputs to 2 displays $display_1 bound to super HDMI-A-1 bound to alt
 
 # WORKSPACE OUTPUT BEGIN
-workspace $workspace1 output $display1
-workspace $workspace2 output $display1
-workspace $workspace3 output $display1
-workspace $workspace4 output $display1
-workspace $workspace5 output $display1
-workspace $workspace6 output $display1
-workspace $workspace7 output $display1
-workspace $workspace8 output $display1
-workspace $workspace9 output $display1
-workspace $workspace11 output $display2
-workspace $workspace12 output $display2
-workspace $workspace13 output $display2
-workspace $workspace14 output $display2
-workspace $workspace15 output $display2
-workspace $workspace16 output $display2
-workspace $workspace17 output $display2
-workspace $workspace18 output $display2
-workspace $workspace19 output $display2
+# workspace $workspace1 output $display1
+# workspace $workspace2 output $display1
+# workspace $workspace3 output $display1
+# workspace $workspace4 output $display1
+# workspace $workspace5 output $display1
+# workspace $workspace6 output $display1
+# workspace $workspace7 output $display1
+# workspace $workspace8 output $display1
+# workspace $workspace9 output $display1
+# workspace $workspace11 output $display2
+# workspace $workspace12 output $display2
+# workspace $workspace13 output $display2
+# workspace $workspace14 output $display2
+# workspace $workspace15 output $display2
+# workspace $workspace16 output $display2
+# workspace $workspace17 output $display2
+# workspace $workspace18 output $display2
+# workspace $workspace19 output $display2
 # WORKSPACE OUTPUT END
 
 # Key bindings
@@ -163,15 +165,17 @@ bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
-bindsym $mod2+1 workspace $workspace11
-bindsym $mod2+2 workspace $workspace12
-bindsym $mod2+3 workspace $workspace13
-bindsym $mod2+4 workspace $workspace14
-bindsym $mod2+5 workspace $workspace15
-bindsym $mod2+6 workspace $workspace16
-bindsym $mod2+7 workspace $workspace17
-bindsym $mod2+8 workspace $workspace18
-bindsym $mod2+9 workspace $workspace19
+bindsym $mod+0 workspace $workspace10
+bindsym $mod2+1 workspace $workspace1
+bindsym $mod2+2 workspace $workspace2
+bindsym $mod2+3 workspace $workspace3
+bindsym $mod2+4 workspace $workspace4
+bindsym $mod2+5 workspace $workspace5
+bindsym $mod2+6 workspace $workspace6
+bindsym $mod2+7 workspace $workspace7
+bindsym $mod2+8 workspace $workspace8
+bindsym $mod2+9 workspace $workspace9
+bindsym $mod2+0 workspace $workspace10
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -181,19 +185,21 @@ bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod2+Shift+1 move container to workspace $workspace11
-bindsym $mod2+Shift+2 move container to workspace $workspace12
-bindsym $mod2+Shift+3 move container to workspace $workspace13
-bindsym $mod2+Shift+4 move container to workspace $workspace14
-bindsym $mod2+Shift+5 move container to workspace $workspace15
-bindsym $mod2+Shift+6 move container to workspace $workspace16
-bindsym $mod2+Shift+7 move container to workspace $workspace17
-bindsym $mod2+Shift+8 move container to workspace $workspace18
-bindsym $mod2+Shift+9 move container to workspace $workspace19
+bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod2+Shift+1 move container to workspace $workspace1
+bindsym $mod2+Shift+2 move container to workspace $workspace2
+bindsym $mod2+Shift+3 move container to workspace $workspace3
+bindsym $mod2+Shift+4 move container to workspace $workspace4
+bindsym $mod2+Shift+5 move container to workspace $workspace5
+bindsym $mod2+Shift+6 move container to workspace $workspace6
+bindsym $mod2+Shift+7 move container to workspace $workspace7
+bindsym $mod2+Shift+8 move container to workspace $workspace8
+bindsym $mod2+Shift+9 move container to workspace $workspace9
+bindsym $mod2+Shift+0 move container to workspace $workspace10
 
 # Bind system control function keys
 bindsym Print exec grim ~/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
-bindsym $mod+Print exec grim -g "$(slurp)" ~/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
+bindsym $mod+Print exec grim -g "$(slurp)" ~/Screenshots/$(date +%d-%B-%Y_%H-%M-%S).png
 bindsym --locked XF86AudioRaiseVolume exec $HOME/.config/sway/volume.sh up
 bindsym --locked XF86AudioLowerVolume exec $HOME/.config/sway/volume.sh down
 bindsym --locked XF86AudioMute exec $HOME/.config/sway/volume.sh mute
