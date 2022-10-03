@@ -1,7 +1,5 @@
 env:
   TERM: xterm-256color
-  WINIT_HIDPI_FACTOR: "1.0"
-  #WINIT_X11_SCALE_FACTOR: "1"
 
 window:
   padding:
@@ -51,7 +49,7 @@ font:
     family: Source Code Pro
     style: Bold Italic
 
-  size: 11
+  size: 9
 
   offset:
     x: 0

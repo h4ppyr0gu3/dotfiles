@@ -10,7 +10,6 @@ default_sink=$(pactl get-default-sink)
 function change_volume() {
   case $command in 
     up)
-      
       pactl set-sink-mute @DEFAULT_SINK@ 0
       pactl set-sink-volume @DEFAULT_SINK@ +5%
       volume_notification;;
