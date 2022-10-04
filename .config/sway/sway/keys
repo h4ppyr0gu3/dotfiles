@@ -44,10 +44,6 @@ bindsym --locked $mod+F1 exec $HOME/.config/sway/volume.sh mute
 bindsym --locked $mod+F2 exec $HOME/.config/sway/volume.sh down
 bindsym --locked $mod+F3 exec $HOME/.config/sway/volume.sh up
 
-bindsym $mod2+z splith
-bindsym $mod2+x splitv
-bindsym $mod+z splith
-bindsym $mod+x splitv
 
 # Power menu
 set $sysmenu " [l]ock [p]oweroff [r]eboot [s]leep "	
@@ -62,30 +58,8 @@ mode $sysmenu {
   bindsym XF86PowerOff    mode "sysmenu"
 }
 
-# resize mode
-bindsym $mod+r mode "resize"
-mode "resize" {
-  bindsym $left resize shrink width 10px
-  bindsym $down resize grow height 10px
-  bindsym $up resize shrink height 10px
-  bindsym $right resize grow width 10px
-  bindsym Left resize shrink width 10px
-  bindsym Down resize grow height 10px
-  bindsym Up resize shrink height 10px
-  bindsym Right resize grow width 10px
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-
-# Layout mode
-set $layout_menu " [s]Stacking [t]Tabbed [p]Split [v]Split-V [h]Split|H "	
-bindsym $mod+s mode $layout_menu
-mode $layout_menu {
-  bindsym h splith; mode "default"
-  bindsym v splitv; mode "default"
-  bindsym s layout stacking; mode "default"
-  bindsym t layout tabbed; mode "default"
-  bindsym p layout toggle split; mode "default"
-  bindsym Escape mode "default"
-  bindsym Return mode "default"
-}
+bindsym $mod2+a splith
+bindsym $mod2+s splitv
+bindsym $mod2+d layout stacking
+bindsym $mod2+f layout toggle split
+bindsym $mod2+g layout toggle all

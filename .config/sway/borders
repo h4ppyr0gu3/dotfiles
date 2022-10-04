@@ -1,0 +1,22 @@
+# Gaps and borders
+bindsym $mod+period			gaps inner all plus 5
+bindsym $mod+comma			gaps inner all minus 5
+bindsym $mod+Shift+period	gaps inner all set 10
+bindsym $mod+Shift+comma	gaps inner all set 0
+gaps inner 1
+gaps outer 1
+smart_gaps on
+hide_edge_borders smart
+default_border pixel 1 
+
+# Set colors
+set $bg #5c5c5c
+set $fg #eff1f5
+set $br #73CEF4
+set $ia #232425
+
+# class                 border  backgr. text    indicator child_border
+client.focused          $br     $br     $bg     $bg       $br
+client.focused_inactive $bg     $bg     $fg     $bg       $bg
+client.unfocused        $bg     $bg     $fg     $bg       $bg
+client.background $bg

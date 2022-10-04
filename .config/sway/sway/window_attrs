@@ -8,6 +8,7 @@ for_window [app_id="mpv"] floating enable
 for_window [class="Audacious"] floating enable
 for_window [app_id="anki"] floating enable
 for_window [class="vlc"] floating enable
+
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [window_role="^browser$"] inhibit_idle focus
 

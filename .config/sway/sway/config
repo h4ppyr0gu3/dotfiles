@@ -49,7 +49,7 @@ include ./workspace_mapping
 include ./input
 include ./window_attrs
 include ./keys
-include ./borders
+include ./test
 
 assign [window_role="^browser$"]: workspace $workspace10
 assign [window_role="browser"]: workspace $workspace10
@@ -61,7 +61,6 @@ exec tlp start
 exec mako 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-# Status Bar:
-bar {
-  swaybar_command waybar
-}
+# Key bindings
+
+# resize mode
