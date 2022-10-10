@@ -58,3 +58,5 @@ alias stop="sudo systemctl stop"
 alias status="sudo systemctl status"
 alias enable="sudo systemctl enable"
 alias disable="sudo systemctl disable"
+
+alias fuckctl="kubectl --insecure-skip-tls-verify"
