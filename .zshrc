@@ -20,7 +20,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # ZSH SPECIFIC
 ZSH_THEME="robbyrussell"
-plugins=( fzf git zsh-autosuggestions sudo copyfile vi-mode fzf-zsh-plugin asdf )
+plugins=( fzf git zsh-autosuggestions sudo copyfile fzf-zsh-plugin asdf )
 DISABLE_FZF_KEY_BINDINGS="false"
 
 zstyle ':omz:update' frequency 10
@@ -28,10 +28,6 @@ export ZSH="/home/david/.oh-my-zsh"
 
 . /opt/asdf-vm/asdf.sh
 
-if [ -e /home/david/.nix-profile/etc/profile.d/nix.sh ]; then . /home/david/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-. /home/david/.nix-profile/etc/profile.d/nix.sh
-
 source $ZSH/oh-my-zsh.sh
-source ~/.config/functions.sh
-source ~/.config/alias.sh
-source ~/.env
+source ~/.config/zsh/functions.sh
+source ~/.config/zsh/alias.sh

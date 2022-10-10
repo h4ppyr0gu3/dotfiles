@@ -13,7 +13,7 @@ SET_OUTPUT=""
 names=$(swaymsg -t get_outputs | grep 'name' | sed 's/[,"]//g')
 number_of_displays=$(swaymsg -t get_outputs | jq '. | length')
 outputs=$(swaymsg -t get_outputs --raw)
-workspaces_per_screen=$(expr 18 / $number_of_displays)
+# workspaces_per_screen=$(expr 18 / $number_of_displays)
 
 set_displays_variable () {
   column=$(expr $i \* 2)
@@ -21,11 +21,11 @@ set_displays_variable () {
   SET_DISPLAY+="set \$display$i $name\n"
 }
 
-workspaces=(
-  "workspace1" "workspace2" "workspace3" "workspace4" "workspace5" "workspace6" "workspace7" 
-  "workspace8" "workspace9" "workspace11" "workspace12" "workspace13" "workspace14" "workspace15"
-  "workspace16" "workspace17" "workspace18" "workspace19"
-)
+# workspaces=(
+#   "workspace1" "workspace2" "workspace3" "workspace4" "workspace5" "workspace6" "workspace7" 
+#   "workspace8" "workspace9" "workspace11" "workspace12" "workspace13" "workspace14" "workspace15"
+#   "workspace16" "workspace17" "workspace18" "workspace19"
+# )
 
 set_workspaces_variable () {
   start=$(($i-1))
@@ -51,14 +51,14 @@ set_output () {
 
 update_config () {
   sed -i -e "/SET DISPLAY BEGIN/,/SET DISPLAY END/c\\# SET DISPLAY BEGIN\n${SET_DISPLAY}# SET DISPLAY END" $HOME/.config/sway/config 
-  sed -i -e "/ASSIGN APPS BEGIN/,/ASSIGN APPS END/c\\# ASSIGN APPS BEGIN\n${ASSIGN_APPS}# ASSIGN APPS END" $HOME/.config/sway/config 
-  sed -i -e "/WORKSPACE OUTPUT BEGIN/,/WORKSPACE OUTPUT END/c\\# WORKSPACE OUTPUT BEGIN\n${WORKSPACE_OUTPUT}# WORKSPACE OUTPUT END" $HOME/.config/sway/config 
+  # sed -i -e "/ASSIGN APPS BEGIN/,/ASSIGN APPS END/c\\# ASSIGN APPS BEGIN\n${ASSIGN_APPS}# ASSIGN APPS END" $HOME/.config/sway/config 
+  # sed -i -e "/WORKSPACE OUTPUT BEGIN/,/WORKSPACE OUTPUT END/c\\# WORKSPACE OUTPUT BEGIN\n${WORKSPACE_OUTPUT}# WORKSPACE OUTPUT END" $HOME/.config/sway/config 
   sed -i -e "/SET OUTPUT BEGIN/,/SET OUTPUT END/c\\# SET OUTPUT BEGIN\n${SET_OUTPUT}# SET OUTPUT END" $HOME/.config/sway/config 
 }
 
 for i in $(seq $number_of_displays); do
   set_output
-  set_workspaces_variable
+#  set_workspaces_variable
   set_displays_variable
 done
 
