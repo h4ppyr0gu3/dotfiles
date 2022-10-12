@@ -24,20 +24,37 @@ package_dir=$(echo $current_dir/pkgs.txt)
 custom_dir=$(echo $current_dir/custom.txt)
 
 main () {
+  set_env_variables
+  add_groups
+  configure_nvim
   print_logo
-  read_packages
-  read_custom
-  install_packages
-  install_custom
+}
+
+add_groups () {
+  user=$(echo $USER)
+  sudo usermod -a -G wireshark $user
+  sudo usermod -a -G input $user
+}
+
+set_env_variables () {
+  if ! grep ILoveCandy /etc/pacman.conf; then
+    sudo sed -i '30iILoveCandy\nColor\nParallelDownloads = 5' /etc/pacman.conf
+  fi
+}
+
+configure_nvim () {
+  if [ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+     $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+  fi
+  nvim --headless -c +PackerInstall +q
 }
 
 print_help () {
-  echo -e "Welcome to the ${GREEN}ZimOS${NC} installation script"
+  echo -e "Welcome to ${GREEN}ZimOS${NC}"
   echo ""
   echo This expects you to:
   echo -e "- be running an ${BLUE}ARCH${NC} based distro"
-  echo -e "- have ${RED}pkgs.txt${NC} in the directory you run this script from"
-  echo -e "- have ${RED}custom.txt${NC} in the directory you run this script from"
   echo ""
   echo "Usage: ./zimos.sh [OPTION]"
   echo "Example: './zimos.sh i'"
@@ -47,12 +64,9 @@ print_help () {
   echo "    -h, --help, h, help               Print this help"
   echo ""
   echo "N.B. This is a minimal install to have a working Desktop Environment"
-  echo "     although it can be extended through the packages"
-}
-
-pac_install () {
-  sudo pacman -Sy --needed --noconfirm $@
-  echo $@
+  echo "     although it can be altered by the required package list"
+  echo ""
+  print_logo
 }
 
 print_logo () {
@@ -75,34 +89,24 @@ print_logo () {
   printf "${NC}\n"
 }
 
-
-read_packages () {
-  readarray -t packages < $package_dir
-}
-
-read_custom () {
-  readarray -t custom < $custom_dir
-}
-
-install_packages () {
-  echo -e "Installing Packages from ${RED}$package_dir${NC}"
-  pac_install ${packages[*]}
-}
-
-install_custom () {
-  source ./custom.sh
-  echo -e "Installing Custom Packages from ${RED}$custom_dir${NC}"
-  custom_packages
-}
-
 uninstall () {
-  read_custom
-  read_packages
   echo uninstalling
-  sudo pacman -R ${packages[*]}
 }
 
 restore () {
+  rm 	$HOME/.config/scripts                 
+  rm 	$HOME/.config/alacritty               
+  rm 	$HOME/.config/cronjobs                
+  rm 	$HOME/.config/nvim                    
+  rm 	$HOME/.config/qutebrowser             
+  rm 	$HOME/.config/sounds                  
+  rm 	$HOME/.config/sway                    
+  rm 	$HOME/.config/wallpapers              
+  rm 	$HOME/.config/libinput-gestures.conf  
+  rm 	$HOME/.config/waybar                  
+  rm 	$HOME/.config/zathura                 
+  rm 	$HOME/.config/zsh                     
+
   mv $HOME/.config/scripts.old           	$HOME/.config/scripts                 
   mv $HOME/.config/alacritty.old         	$HOME/.config/alacritty               
   mv $HOME/.config/cronjobs.old          	$HOME/.config/cronjobs                

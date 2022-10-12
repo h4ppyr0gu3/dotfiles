@@ -26,7 +26,7 @@ cfgacp() {
     $HOME/.config/scripts $HOME/.config/alacritty $HOME/.config/cronjobs \
     $HOME/.config/nvim $HOME/.config/qutebrowser $HOME/.config/scripts \
     $HOME/.config/sounds $HOME/.config/sway $HOME/.config/wallpapers \
-    $HOME/.config/libiput-gestures.conf $HOME/.config/waybar $HOME/.config/zathura \
+    $HOME/.config/libinput-gestures.conf $HOME/.config/waybar $HOME/.config/zathura \
     $HOME/.config/zsh
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME commit -m 'cfgacp'
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push origin master

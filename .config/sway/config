@@ -50,8 +50,8 @@ include ./window_attrs
 include ./keys
 include ./borders
 
-assign [window_role="^browser$"]: workspace $workspace10
-assign [window_role="browser"]: workspace $workspace10
+assign [class="firefoxdeveloperedition"]: workspace $workspace10
+assign [class="firefox"]: workspace $workspace10
 assign [class="Slack"]: workspace $workspace9
 
 # ausotstart applications
