@@ -43,11 +43,7 @@ cfgacp() {
     $HOME/.config/nvim $HOME/.config/qutebrowser $HOME/.config/scripts \
     $HOME/.config/sounds $HOME/.config/sway $HOME/.config/wallpapers \
     $HOME/.config/libinput-gestures.conf $HOME/.config/waybar $HOME/.config/zathura \
-<<<<<<< HEAD
     $HOME/.config/zsh $HOME/.config/mako
-=======
-    $HOME/.config/zsh
->>>>>>> 21cf989 (cfgacp)
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME commit -m 'cfgacp'
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push origin master
 }
