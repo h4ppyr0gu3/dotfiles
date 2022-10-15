@@ -9,7 +9,7 @@ acp() {
   done
   msg=""
   vared -p "commit message: " msg
-  git commit -m "$msg"
+  git commit -S -m "$msg"
   branch=$(git branch --show-current)
   git push origin $branch
 }
