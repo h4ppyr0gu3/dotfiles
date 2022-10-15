@@ -14,7 +14,7 @@ acp() {
   git push origin $branch
 }
 
-acp() {
+wacp() {
   git status
   string=""
   vared -p "files and directories to add: " string
