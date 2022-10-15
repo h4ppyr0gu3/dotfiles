@@ -1,0 +1,23 @@
+#!/bin/bash
+
+nmcli radio wifi on
+
+network_name=$(nmcli -m multiline dev wifi list | grep -e '^SSID:' | awk '{print $2}' | fzf)
+
+if [[ $network_name = "" ]]; then
+  exit 1
+fi
+
+bssid=$(nmcli -m tabular dev wifi list | grep $network_name | awk '{print $1}')
+
+read -p "Password: " password
+
+return=$(nmcli dev wifi connect $bssid password $password)
+
+if [[ $return = "" ]]; then
+  notify-send -a "Wifi" "Failed to connect to $network_name"
+  nmcli radio wifi off
+else
+  notify-send -a "Wifi" "Successfully connected to $network_name"
+fi
+

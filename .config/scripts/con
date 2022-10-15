@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pod_name=$(kubectl get pods | grep $CONTAINER_NAME | awk '{print $1}')
+kubectx -c
+kubectl exec -it $pod_name -- /bin/bash

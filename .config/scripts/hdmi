@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# This script will read the current state of displays and then update your sway config
+# and reload, it splits the workspaces evenly between the displays and updates the outputs
+
+# This script should be used after using a graphical solution like wdisplays
+
+ASSIGN_APPS=""
+WORKSPACE_OUTPUT=""
+SET_DISPLAY=""
+SET_OUTPUT=""
+
+names=$(swaymsg -t get_outputs | grep 'name' | sed 's/[,"]//g')
+number_of_displays=$(swaymsg -t get_outputs | jq '. | length')
+outputs=$(swaymsg -t get_outputs --raw)
+# workspaces_per_screen=$(expr 18 / $number_of_displays)
+
+set_displays_variable () {
+  column=$(expr $i \* 2)
+  name=$(echo $names | awk -v "column=${column}" '{print $column}')
+  SET_DISPLAY+="set \$display$i $name\n"
+}
+
+# workspaces=(
+#   "workspace1" "workspace2" "workspace3" "workspace4" "workspace5" "workspace6" "workspace7" 
+#   "workspace8" "workspace9" "workspace11" "workspace12" "workspace13" "workspace14" "workspace15"
+#   "workspace16" "workspace17" "workspace18" "workspace19"
+# )
+
+set_workspaces_variable () {
+  start=$(($i-1))
+  begin=$(($start*$workspaces_per_screen))
+  counter=0
+  for j in ${workspaces[@]:$begin:$workspaces_per_screen}; do
+    WORKSPACE_OUTPUT+="workspace \$$j output \$display$i\n"
+    if [ $i -eq 2 ] && [ $counter -eq 0 ]; then
+      ASSIGN_APPS+="assign [window_role=\"^browser$\"]: workspace \$$j\n"
+    fi
+    if [ $i -eq 2 ] && [ $counter -eq 1 ]; then
+      ASSIGN_APPS+="assign [class=\"Slack\"]: workspace \$$j\n"
+    fi
+    counter=$(($counter+1))
+  done
+}
+
+set_output () {
+  serial=$(echo $outputs | jq --argjson index $(($i-1)) '.[$index] | "\(.serial)"')
+  current_mode=$(echo $outputs | jq --argjson index $(($i-1)) '.[$index] | "resolution \(.modes[0].width)x\(.modes[0].height) position \(.rect.x),\(.rect.y)"')
+  SET_OUTPUT+="output \$display$i $(echo $current_mode | sed 's/"//g')\n"
+}
+
+update_config () {
+  sed -i -e "/SET DISPLAY BEGIN/,/SET DISPLAY END/c\\# SET DISPLAY BEGIN\n${SET_DISPLAY}# SET DISPLAY END" $HOME/.config/sway/config 
+  # sed -i -e "/ASSIGN APPS BEGIN/,/ASSIGN APPS END/c\\# ASSIGN APPS BEGIN\n${ASSIGN_APPS}# ASSIGN APPS END" $HOME/.config/sway/config 
+  # sed -i -e "/WORKSPACE OUTPUT BEGIN/,/WORKSPACE OUTPUT END/c\\# WORKSPACE OUTPUT BEGIN\n${WORKSPACE_OUTPUT}# WORKSPACE OUTPUT END" $HOME/.config/sway/config 
+  sed -i -e "/SET OUTPUT BEGIN/,/SET OUTPUT END/c\\# SET OUTPUT BEGIN\n${SET_OUTPUT}# SET OUTPUT END" $HOME/.config/sway/config 
+}
+
+for i in $(seq $number_of_displays); do
+  set_output
+#  set_workspaces_variable
+  set_displays_variable
+done
+
+update_config
+
+swaymsg reload
