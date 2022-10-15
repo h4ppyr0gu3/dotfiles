@@ -33,6 +33,7 @@ main () {
 add_groups () {
   user=$(echo $USER)
   sudo usermod -a -G wireshark $user
+  sudo usermod -a -G docker $user
   sudo usermod -a -G input $user
 }
 
