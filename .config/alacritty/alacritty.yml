@@ -6,7 +6,7 @@ window:
     x: 4
     y: 4
   dynamic_padding: true
-  opacity: 0.70
+  opacity: 0.98
   title: Alacritty
   class:
     instance: Alacritty
@@ -59,8 +59,8 @@ draw_bold_text_with_bright_colors: true
 
 colors:
   primary:
-    background: '0x000000'
-    foreground: '0xeeeeee'
+    background: '0x010409'
+    foreground: '0xffffff'
   normal:
     black:   '0x282828'
     red:     '0xf43753'
