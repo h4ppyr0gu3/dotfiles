@@ -29,7 +29,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Bind system control function keys
-bindsym Print exec grim ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
+bindsym Print exec grim ~/screenshots/$(date +%d-%B-%Y_%H-%M-%S).png
 bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%d-%B-%Y_%H-%M-%S).png
 bindsym --locked XF86AudioRaiseVolume exec $HOME/.config/sway/volume.sh up
 bindsym --locked XF86AudioLowerVolume exec $HOME/.config/sway/volume.sh down
