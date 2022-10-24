@@ -12,22 +12,25 @@ require('packer').startup(function(use)
     "jlcrochet/vim-ruby",
     "tbastos/vim-lua",
     "elixir-editors/vim-elixir",
+    "EdenEast/nightfox.nvim",
     "jparise/vim-graphql",
     "slim-template/vim-slim",
     "joshdick/onedark.vim",
-    "jacoborus/tender.vim",
+    "h4ppyr0gu3/tender.vim",
+    "catppuccin/nvim",
     "nvim-lua/plenary.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "junegunn/fzf", run = function() vim.fn['fzf#install'](0) end,
-    'rafcamlet/nvim-luapad',
+    "rafcamlet/nvim-luapad",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter", run = function() vim.fn("TSUpdate") end,
+    "UtkarshVerma/molokai.nvim",
     "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
     "nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
-    'glacambre/firenvim',
+    "ThePrimeagen/harpoon",
     run = function() vim.fn['firenvim#install'](0) end
   }
   --use "numToStr/FTerm.nvim"

@@ -76,10 +76,27 @@ vim.lsp.with(
 
 -- nvim-treesitter config
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "ruby", "elixir", "lua", "rust" },
+  ensure_installed = { "ruby", "elixir", "lua", "rust",
+    "eex", "elixir", "erlang", "heex", "html", "surface", },
   sync_install = false,
   auto_install = true,
   highlight = {
-    enable = false,
+    enable = true,
   },
+  indent = {
+    enable = true
+  }
 }
+
+-- telescope setup
+require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules", "deps", "_build" }} }
+
+-- harpoon setup
+local function set_keymap(mode, lhs, rhs, opts)
+  vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+end
+set_keymap('n', 'mf', ":lua require('harpoon.mark').add_file()<CR>", { noremap = true })
+set_keymap('n', 'mm', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true })
+set_keymap('n', 'mn', ":lua require('harpoon.ui').nav_next()<CR>", { noremap = true })
+set_keymap('n', 'mp', ":lua require('harpoon.ui').nav_prev()<CR>", { noremap = true })
+
