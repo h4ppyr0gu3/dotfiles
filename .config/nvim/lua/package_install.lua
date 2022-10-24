@@ -11,6 +11,7 @@ require('packer').startup(function(use)
     "voldikss/vim-floaterm",
     "jlcrochet/vim-ruby",
     "tbastos/vim-lua",
+    "jacoborus/tender.vim",
     "elixir-editors/vim-elixir",
     "jparise/vim-graphql",
     "slim-template/vim-slim",
@@ -26,8 +27,5 @@ require('packer').startup(function(use)
     "MunifTanjim/nui.nvim",
     "nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
     "ThePrimeagen/harpoon",
-  }
-  use {
-    "h4ppyr0gu3/tender.vim", branch = 'feat/add-treesitter-support',
   }
 end)

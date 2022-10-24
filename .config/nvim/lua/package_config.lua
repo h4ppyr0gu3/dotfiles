@@ -78,10 +78,11 @@ vim.lsp.with(
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "ruby", "elixir", "lua", "rust",
     "eex", "elixir", "erlang", "heex", "html", "surface", },
-  sync_install = false,
+  sync_install = true,
   auto_install = true,
   highlight = {
-    enable = true,
+    enable = false,
+    disable = {"ruby", "elixir"}
   },
   indent = {
     enable = true
