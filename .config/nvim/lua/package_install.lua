@@ -12,12 +12,8 @@ require('packer').startup(function(use)
     "jlcrochet/vim-ruby",
     "tbastos/vim-lua",
     "elixir-editors/vim-elixir",
-    "EdenEast/nightfox.nvim",
     "jparise/vim-graphql",
     "slim-template/vim-slim",
-    "joshdick/onedark.vim",
-    "h4ppyr0gu3/tender.vim",
-    "catppuccin/nvim",
     "nvim-lua/plenary.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -26,13 +22,12 @@ require('packer').startup(function(use)
     "rafcamlet/nvim-luapad",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter", run = function() vim.fn("TSUpdate") end,
-    "UtkarshVerma/molokai.nvim",
-    "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+    "kyazdani42/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
     "nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
     "ThePrimeagen/harpoon",
-    run = function() vim.fn['firenvim#install'](0) end
   }
-  --use "numToStr/FTerm.nvim"
-  --use "~/api-nvim"
+  use {
+    "h4ppyr0gu3/tender.vim", branch = 'feat/add-treesitter-support',
+  }
 end)
