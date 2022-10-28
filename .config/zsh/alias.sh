@@ -7,6 +7,7 @@ alias v="nvim"
 alias bex="bundle exec"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
 alias db:clf="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:13"
+alias db:clf-prod="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-prod-db:/var/lib/postgresql/data -d postgres:12"
 
 alias hdd:status="sudo hdparm -C /dev/sda"
 alias hdd:standby="sudo hdparm -Y /dev/sda"
