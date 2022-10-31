@@ -11,7 +11,7 @@ require('packer').startup(function(use)
     "voldikss/vim-floaterm",
     "jlcrochet/vim-ruby",
     "tbastos/vim-lua",
-    "jacoborus/tender.vim",
+    "~/tender.vim",
     "elixir-editors/vim-elixir",
     "jparise/vim-graphql",
     "slim-template/vim-slim",
