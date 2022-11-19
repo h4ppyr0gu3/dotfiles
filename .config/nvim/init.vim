@@ -34,8 +34,7 @@ set signcolumn=yes
 filetype plugin indent on
 syntax on
 
-" colorscheme tender
-
+" highlight overrides
 hi Normal guibg=NONE ctermbg=NONE
 hi clear LineNr
 hi LineNr ctermfg=132 guifg=#af5f87
@@ -43,6 +42,16 @@ hi clear CursorLine
 hi CursorLineNR guibg=NONE ctermbg=NONE ctermfg=184 guifg=#d7d700
 hi SignColumn guibg=NONE ctermbg=NONE
 hi FloatBorder guibg=NONE ctermbg=NONE
+hi NormalNC guibg=NONE ctermbg=NONE
+hi NormalFloat guibg=NONE ctermbg=NONE
+hi TelescopeNormal guibg=NONE ctermbg=NONE
+hi TelescopeBorder guibg=NONE ctermbg=NONE
+hi TelescopePromptBorder guibg=NONE ctermbg=NONE
+hi TelescopePromptNormal guibg=NONE ctermbg=NONE
+hi TelescopePromptPrefix guibg=NONE ctermbg=NONE
+hi TelescopePreviewTitle guibg=NONE ctermbg=NONE
+hi TelescopePromptTitle guibg=NONE ctermbg=NONE
+hi TelescopeResultsTitle guibg=NONE ctermbg=NONE
 
 " netrw and vim vinegar config
 let g:netrw_keepdir=0
