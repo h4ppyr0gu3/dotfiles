@@ -1,22 +1,3 @@
--- neotree setup
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
-require("neo-tree").setup({
-  popup_border_style = "NC",
-  window = {
-    position = "float",
-    popup = {
-      size =
-      { height = "90%" },
-      border = "rounded",
-      position = "45%",
-    }
-  },
-  filesystem = {
-    hijack_netrw_behavior = "disabled",
-    follow_current_file = true,
-  }
-})
 -- mason and lsp setup
 require("mason").setup()
 require("mason-lspconfig").setup({
