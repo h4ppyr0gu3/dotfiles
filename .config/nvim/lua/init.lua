@@ -24,7 +24,7 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 -- mappings for installed packages
-map("n", "<leader>lf", ":Neotree<CR>")
+map("n", "<leader>lf", ":Lexplore<CR>")
 map("n", "<leader>tr", ":Explore<CR>")
 map("n", "<leader>fz", ":FZF<CR>")
 map("n", "<leader>tb", ":TagbarToggle<CR>")

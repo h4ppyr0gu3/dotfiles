@@ -81,8 +81,7 @@ require'nvim-treesitter.configs'.setup {
   sync_install = true,
   auto_install = true,
   highlight = {
-    enable = true,
-    disable = {"ruby", "elixir"}
+    enabled = true
   },
   indent = {
     enable = true
@@ -101,3 +100,100 @@ set_keymap('n', 'mm', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { no
 set_keymap('n', 'mn', ":lua require('harpoon.ui').nav_next()<CR>", { noremap = true })
 set_keymap('n', 'mp', ":lua require('harpoon.ui').nav_prev()<CR>", { noremap = true })
 
+-- nvim-base16 setup
+-- tender colorscheme not ready yet
+-- require('base16-colorscheme').setup({
+--   base00 = '#32302f', -- off white
+--   base01 = '#3c3836', -- grey
+--   base02 = '#504945', -- comments
+--   base03 = '#665c54', -- grey
+--   base04 = '#bdae93', -- off white
+--   base05 = '#d5c4a1', -- white
+--   base06 = '#ebdbb2', -- idk probs numbers
+--   base07 = '#fbf1c7', -- idk
+--   base08 = '#73cef4', -- calling class
+--   base0A = '#73cef4',
+-- base09 = '#73cef4', 
+-- base0B = '#ffc24b',
+-- base0C = '#b3deef', 
+-- base0D = '#b3deef',
+-- base0E = '#c9d05c',
+-- base0F = '#73cef4',
+-- })
+
+-- gruvbox colorscheme
+require('base16-colorscheme').setup({
+  base00 = '#32302f',
+  base01 = '#3c3836',
+  base02 = '#504945',
+  base03 = '#665c54',
+  base04 = '#bdae93',
+  base05 = '#d5c4a1',
+  base06 = '#ebdbb2',
+  base07 = '#fbf1c7',
+  base08 = '#fb4934',
+  base09 = '#fe8019',
+  base0A = '#fabd2f',
+  base0B = '#b8bb26',
+  base0C = '#8ec07c', 
+  base0D = '#83a598',
+  base0E = '#d3869b',
+  base0F = '#d65d0e',
+})
+
+   -- black:   '0x282828'
+   --  red:     '0xf43753'
+   --  green:   '0xc9d05c'
+   --  yellow:  '0xffc24b'
+   --  blue:    '0xb3deef'
+   --  magenta: '0xd3b987'
+   --  cyan:    '0x73cef4'
+   --  white:   '0xeeeeee'
+
+  -- # Bright colors
+  -- bright:
+   --  black:   '0x4c4c4c'
+   --  red:     '0xf43753'
+   --  green:   '0xc9d05c'
+   --  yellow:  '0xffc24b'
+   --  blue:    '0xb3deef'
+   --  magenta: '0xd3b987'
+   --  cyan:    '0x73cef4'
+   --  white:   '0xfeffff'
+
+vim.api.nvim_exec(
+[[
+  hi NormalNC guibg=NONE ctermbg=NONE
+  hi NormalFloat guibg=NONE ctermbg=NONE
+  hi TelescopeNormal guibg=NONE ctermbg=NONE
+  hi TelescopeBorder guibg=NONE ctermbg=NONE
+  hi TelescopePromptBorder guibg=NONE ctermbg=NONE
+  hi TelescopePromptNormal guibg=NONE ctermbg=NONE
+  hi TelescopePromptPrefix guibg=NONE ctermbg=NONE
+  hi TelescopePreviewTitle guibg=NONE ctermbg=NONE
+  hi TelescopePromptTitle guibg=NONE ctermbg=NONE
+  hi TelescopeResultsTitle guibg=NONE ctermbg=NONE
+]], false)
+-- hi TelescopeSelection guibg=NONE ctermbg=NONE
+-- hi TelescopePreviewLine guibg=NONE ctermbg=NONE
+-- hi TelescopeSelection guibg=NONE ctermbg=NONE
+-- hi TelescopePreviewLine guibg=NONE ctermbg=NONE
+-- hi StatusLine guibg=NONE ctermbg=NONE
+-- hi StatusLineNC guibg=NONE ctermbg=NONE
+-- hi WinSeperator guibg=NONE ctermbg=NONE
+-- hi VertSplit guibg=NONE ctermbg=NONE
+
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+}

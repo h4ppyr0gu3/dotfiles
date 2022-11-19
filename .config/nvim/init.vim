@@ -34,11 +34,18 @@ set signcolumn=yes
 filetype plugin indent on
 syntax on
 
-colorscheme tender
+" colorscheme tender
 
 hi Normal guibg=NONE ctermbg=NONE
+hi clear LineNr
 hi LineNr ctermfg=132 guifg=#af5f87
 hi clear CursorLine
 hi CursorLineNR guibg=NONE ctermbg=NONE ctermfg=184 guifg=#d7d700
 hi SignColumn guibg=NONE ctermbg=NONE
 hi FloatBorder guibg=NONE ctermbg=NONE
+
+" netrw and vim vinegar config
+let g:netrw_keepdir=0
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

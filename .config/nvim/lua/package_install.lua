@@ -1,7 +1,7 @@
 require('packer').startup(function(use)
   use {
     "wbthomason/packer.nvim",
-    "vim-airline/vim-airline",
+    "nvim-lualine/lualine.nvim",
     "tpope/vim-commentary",
     "preservim/tagbar",
     "junegunn/fzf.vim",
@@ -27,5 +27,8 @@ require('packer').startup(function(use)
     "MunifTanjim/nui.nvim",
     "nvim-neo-tree/neo-tree.nvim", branch = "v2.x",
     "ThePrimeagen/harpoon",
+    "mxw/vim-jsx",
+    "RRethy/nvim-base16",
+    "tpope/vim-vinegar",
   }
 end)
