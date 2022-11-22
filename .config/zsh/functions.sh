@@ -37,6 +37,10 @@ branchdiff() {
   git diff $base_branch..$current_branch | nvim -R
 }
 
+c() { 
+  echo "$@" | bc -l; 
+}
+
 cfgacp() {
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add $HOME/.zshrc \
     $HOME/.config/scripts $HOME/.config/alacritty $HOME/.config/cronjobs \

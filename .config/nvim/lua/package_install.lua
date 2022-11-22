@@ -25,6 +25,5 @@ require('packer').startup(function(use)
     "ThePrimeagen/harpoon",
     "mxw/vim-jsx",
     "RRethy/nvim-base16",
-    "tpope/vim-vinegar",
   }
 end)

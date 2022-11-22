@@ -25,7 +25,7 @@ set $lockscreen $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n
 
 # SET DISPLAY BEGIN
 set $display1 eDP-1
-set $display2 HDMI-A-1
+set $display2 DP-1
 # SET DISPLAY END
 
 font "TerminessTTF Nerd Font 12"
@@ -33,7 +33,7 @@ font "TerminessTTF Nerd Font 12"
 output * bg $wallpaper fill
 
 # SET OUTPUT BEGIN
-output $display1 resolution 1366x768 position 247,1080
+output $display1 resolution 3840x2160 position 0,1080
 output $display2 resolution 1920x1080 position 0,0
 # SET OUTPUT END
 

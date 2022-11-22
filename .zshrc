@@ -2,6 +2,7 @@
 export HOME="/home/david"
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nvim'
+# export ASDF_DIR="$HOME/.asdf/"
 export PATH="$HOME/.config/scripts:$PATH"
 export PATH="/usr/sbin/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -26,7 +27,7 @@ DISABLE_FZF_KEY_BINDINGS="false"
 zstyle ':omz:update' frequency 10
 export ZSH="/home/david/.oh-my-zsh"
 
-. /opt/asdf-vm/asdf.sh
+. $HOME/.asdf/asdf.sh
 
 source $ZSH/oh-my-zsh.sh
 source ~/.config/zsh/functions.sh
