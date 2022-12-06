@@ -25,5 +25,8 @@ require('packer').startup(function(use)
     "ThePrimeagen/harpoon",
     "mxw/vim-jsx",
     "RRethy/nvim-base16",
+    "tamago324/nlsp-settings.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+    "jose-elias-alvarez/typescript.nvim",
   }
 end)

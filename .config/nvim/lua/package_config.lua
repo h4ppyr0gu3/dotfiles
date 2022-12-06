@@ -36,8 +36,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 end
 
+require("typescript").setup({})
+
 local servers = {
-  "solargraph", "rust_analyzer", "elixirls", "sumneko_lua", "dockerls", -- "cryatalline",
+  "solargraph", "rust_analyzer", "elixirls", "sumneko_lua", "dockerls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -58,7 +60,7 @@ vim.lsp.with(
 -- nvim-treesitter config
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "ruby", "elixir", "lua", "rust",
-    "eex", "elixir", "erlang", "heex", "html", "surface", },
+    "eex", "erlang", "heex", "html", "surface", "tsx"},
   sync_install = true,
   auto_install = true,
   highlight = {
