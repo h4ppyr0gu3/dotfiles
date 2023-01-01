@@ -56,7 +56,7 @@ z() {
   zathura $1 &
 }
 
-mpv() {
+m() {
   mpv $1 &
 }
 
