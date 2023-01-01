@@ -51,3 +51,12 @@ cfgacp() {
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME commit -m 'cfgacp'
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push origin master
 }
+
+z() {
+  zathura $1 &
+}
+
+mpv() {
+  mpv $1 &
+}
+

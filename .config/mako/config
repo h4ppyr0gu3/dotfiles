@@ -10,6 +10,3 @@ progress-color=over #1FB1F9
 text-color=#fdf6e3
 format=<b>%s</b> <span color="#93a1a1">(%a)</span>\n%b
 
-
-
-
