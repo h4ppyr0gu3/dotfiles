@@ -47,8 +47,6 @@ alias kernel:unsigned="~/bin/kernel-unsigned"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias open="xdg-open"
 
-alias minictl="minikube kubectl"
-
 alias vedit="nvim $HOME/.config/nvim/init.vim"
 alias swayedit="nvim $HOME/.config/sway/config"
 alias funcedit="nvim $HOME/.config/zsh/functions.sh"
@@ -64,3 +62,5 @@ alias enable="sudo systemctl enable"
 alias disable="sudo systemctl disable"
 
 alias fuckctl="kubectl --insecure-skip-tls-verify"
+
+alias pysrc="source ./bin/activate"
