@@ -10,7 +10,7 @@ default_sink=$(pactl get-default-sink)
 function change_volume() {
   case $command in 
     up)
-      if [[ $(pactl get-sink-volume $(pactl get-default-sink) | grep Volume | awk '{print $5}' | sed 's/%//') -lt 110 ]]; then 
+      if [[ $(pactl get-sink-volume $default_sink | awk '{print $5}' | sed 's/%//') -lt 110 ]]; then 
         pactl set-sink-mute @DEFAULT_SINK@ 0
         pactl set-sink-volume @DEFAULT_SINK@ +5%
       else
