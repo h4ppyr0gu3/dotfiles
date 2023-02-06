@@ -5,6 +5,8 @@ alias keychain:upgrade="sudo pacman -S archlinux-keyring"
 alias pacin="sudo pacman -S"
 alias v="nvim"
 
+# alias db:asdf="/home/david/.asdf/installs/postgres/13.0/bin/pg_ctl -D /home/david/.asdf/installs/postgres/13.0/data -l logfile start"
+
 alias bex="bundle exec"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
 
