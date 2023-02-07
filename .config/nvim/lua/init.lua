@@ -1,4 +1,4 @@
--- require("package_install")
+require("package_install")
 require("package_config")
 Func = require("functions")
 

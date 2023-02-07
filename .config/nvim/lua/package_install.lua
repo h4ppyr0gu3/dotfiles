@@ -28,5 +28,6 @@ require('packer').startup(function(use)
     "tamago324/nlsp-settings.nvim",
     "jose-elias-alvarez/null-ls.nvim",
     "jose-elias-alvarez/typescript.nvim",
+    "ap/vim-css-color",
   }
 end)
