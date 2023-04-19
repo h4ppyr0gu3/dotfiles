@@ -24,7 +24,7 @@ alias db:reset="rails db:drop db:create db:migrate db:seed"
 
 # Docker containers
 alias db:pgadmin="docker run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
-alias db:clf="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:12"
+alias db:clf="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d docker.io/postgres:12"
 alias db:clf-prod="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-prod-db:/var/lib/postgresql/data -d postgres:12"
 
 

@@ -1,6 +1,6 @@
 # EXPORTS (ruby rust node flatpak)
 export HOME="/home/david"
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nvim'
 # export ASDF_DIR="$HOME/.asdf/"
 export PATH="$HOME/.config/scripts:$PATH"
@@ -18,16 +18,19 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# ZSH SPECIFIC
-ZSH_THEME="robbyrussell"
-plugins=( fzf git zsh-autosuggestions sudo copyfile fzf-zsh-plugin asdf )
-DISABLE_FZF_KEY_BINDINGS="false"
+load_asdf() {
+  if [ -f $HOME/.asdf/asdf.sh ]; then
+    . $HOME/.asdf/asdf.sh
+  fi
+  if [ -f /opt/asdf-vm/asdf.sh ]; then
+    . /opt/asdf-vm/asdf.sh
+  fi
+}
 
-zstyle ':omz:update' frequency 10
-export ZSH="/home/david/.oh-my-zsh"
+load_asdf
 
-. $HOME/.asdf/asdf.sh
-
-source $ZSH/oh-my-zsh.sh
 source ~/.config/zsh/functions.sh
 source ~/.config/zsh/alias.sh
+source ~/.config/zsh/sudo.sh
+source ~/.config/zsh/git.sh
+source ~/.config/zsh/color.sh
