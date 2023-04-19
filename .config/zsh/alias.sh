@@ -6,14 +6,27 @@ alias pacin="sudo pacman -S"
 alias v="nvim"
 
 # alias db:asdf="/home/david/.asdf/installs/postgres/13.0/bin/pg_ctl -D /home/david/.asdf/installs/postgres/13.0/data -l logfile start"
+alias mapp:start="\
+  cd $HOME/mafe && npm run dev & \ 
+  cd $HOME/mapp && rails s & \
+  cd $HOME/mapp && bundle exec sidekiq"
+alias mapp:stop="\
+  sudo kill -9 \$(pgrep node) ; \
+  sudo kill \$(pgrep ruby) ; \
+  sudo kill -9 \$(pgrep sidekiq)"
+alias clf:start="\
+  cd $HOME/cooleaf-v2 && bundle exec rails s &\
+  cd $HOME/cooleaf-v2 && bundle exec sidekiq &\
+  cd $HOME/project-atlanta && npm run start:web &"
 
 alias bex="bundle exec"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
 
 # Docker containers
 alias db:pgadmin="docker run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
-alias db:clf="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:13"
+alias db:clf="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:12"
 alias db:clf-prod="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-prod-db:/var/lib/postgresql/data -d postgres:12"
+
 
 # System resources
 alias hdd:status="sudo hdparm -C /dev/sda"
@@ -34,17 +47,20 @@ alias ls="ls --color"
 alias la="exa -la"
 alias tree="exa --tree"
 alias co="git checkout"
+alias lg="lazygit"
 
 alias clf:beef="cd cooleaf-v2 && nvm use 8 && npm install && npm run watch"
 alias clf:fe="cd project-atlanta && nvm use 14 && npm install && npm run start:web"
-alias clf="sudo systemctl start redis docker &&
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:13 &&
-sudo sed -i '1s/^/# Custom Entry\nnameserver 127.0.0.1\n/' /etc/resolv.conf &&
-sudo systemctl restart dnsmasq &&
-alacritty --working-directory ~/cooleaf-v2 -t rails_server -e bundle exec rails s -b 0.0.0.0 &
-alacritty --working-directory ~/cooleaf-v2 -t sidekiq -e bundle exec sidekiq &
-alacritty --working-directory ~/cooleaf-v2 -t rails_console -e bundle exec rails c &"
+alias clf="\
+  sudo systemctl start redis nginx && \
+  podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d postgres:13 && \
+  sudo sed -i '1s/^/# Custom Entry\nnameserver 127.0.0.1\n/' /etc/resolv.conf && \
+  sudo systemctl restart dnsmasq && \
+  cd $HOME/cooleaf-v2 && bundle exec rails s & \
+  cd $HOME/cooleaf-v2 && bundle exec sidekiq & \
+  cd $HOME/project-atlanta && npm run start:web & "
 alias sys:logout="swaymsg exit"
+alias run="alacritty --working-directory . -t run -e "
 alias ram:clean="su -c sync; echo 1 | sudo tee /proc/sys/vm/drop_caches"
 
 alias kernel:unsigned="~/bin/kernel-unsigned"

@@ -215,12 +215,17 @@ key_bindings:
   - { key: Minus,     mods: Control,       action: DecreaseFontSize            }
   - { key: F11,       mods: None,          action: ToggleFullscreen            }
   - { key: Paste,     mods: None,          action: Paste                       }
+  - { key: V,         mods: Super,         action: Paste                       }
   - { key: Copy,      mods: None,          action: Copy                        }
-  - { key: L,         mods: Control,       action: ClearLogNotice              }
-  - { key: L,         mods: Control,       chars: "\x0c"                       }
+  - { key: C,         mods: Super,         action: Copy                        }
   - { key: PageUp,    mods: None,          action: ScrollPageUp,   mode: ~Alt  }
   - { key: PageDown,  mods: None,          action: ScrollPageDown, mode: ~Alt  }
   - { key: Home,      mods: Shift,         action: ScrollToTop,    mode: ~Alt  }
   - { key: End,       mods: Shift,         action: ScrollToBottom, mode: ~Alt  }
+  - { key: L,         mods: Control,       action: ReceiveChar,    mode: ~Alt  }
+  - { key: L,         mods: Control,       chars: "\x11"          }
+
+
+  # - { key: L,         mods: Control,       chars: "\x0c"                       }
 
 

@@ -16,12 +16,13 @@ set autoindent
 set number       
 set wildmode=longest,list    
 set mouse=a                 
+" set paste
 set clipboard=unnamedplus  
 set relativenumber
 set colorcolumn=0
 set path+=**
-set wildmenu
-set splitright
+set wildmenu 
+set splitright 
 set splitbelow
 set scrolloff=6
 set noswapfile
@@ -53,5 +54,24 @@ hi TelescopePreviewTitle guibg=NONE ctermbg=NONE
 hi TelescopePromptTitle guibg=NONE ctermbg=NONE
 hi TelescopeResultsTitle guibg=NONE ctermbg=NONE
 
-" netrw and vim vinegar config
 let g:netrw_banner=0
+let b:copilot_enabled = v:true
+
+" tender colorscheme by https://github.com/jacoborus adopted for 16 bit
+"   base00 = '#32302f', -- dark grey
+"   base01 = '#3c3836',
+"   base03 = '#555555', -- comments
+"   base02 = '#504945', -- light grey
+"   base04 = '#bdae93',
+"   base05 = '#e1e1e1', -- function parameters and brackets
+"   base06 = '#ebdbb2',
+"   base07 = '#fbf1c7',
+"   base08 = '#e1e1e1', -- variable declaration and function call params
+"   base0B = '#d3b987', -- strings and keys
+"   base0D = '#b3deef', -- function calls
+"   base09 = '#ffc24b', -- values ,int , boolean
+"   base0A = '#73cef4', -- class Reference
+"   base0C = '#8ec07c',
+"   base0F = '#f43753', -- commas and dots
+"   base0E = '#c9d05c', -- keywords class, def
+
