@@ -1,9 +1,12 @@
 -- mason and lsp setup
 require("mason").setup()
+
+local servers = {
+  "solargraph", "rust_analyzer", "elixirls",
+}
+
 require("mason-lspconfig").setup({
-  ensure_installed = {
-    "solargraph", "rust_analyzer", "elixirls", "dockerls",
-  }
+  ensure_installed = servers
 })
 
 -- require("tailwindcss-colors").setup()
@@ -53,10 +56,6 @@ nvim_lsp.tsserver.setup {
 -- })
 
 require("typescript").setup({})
-
-local servers = {
-  "solargraph", "rust_analyzer", "elixirls", "dockerls",
-}
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
