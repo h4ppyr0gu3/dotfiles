@@ -27,7 +27,6 @@ require('packer').startup(function(use)
     "tamago324/nlsp-settings.nvim",
     "jose-elias-alvarez/null-ls.nvim",
     "jose-elias-alvarez/typescript.nvim",
-    -- "Exafunction/codeium.vim",
     "MunifTanjim/prettier.nvim",
     "L3MON4D3/LuaSnip",
     "hrsh7th/cmp-nvim-lsp",
@@ -37,7 +36,6 @@ require('packer').startup(function(use)
     "akinsho/nvim-bufferline.lua",
     "github/copilot.vim",
     "simrat39/symbols-outline.nvim",
-    -- "prichrd/netrw.nvim",
     "themaxmarchuk/tailwindcss-colors.nvim",
   }
 end)
