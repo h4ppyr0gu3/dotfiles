@@ -1,6 +1,6 @@
 alias src="source ~/.zshrc"
 
-alias upgrade="sudo pacman -Syu"
+alias upgrade="sudo pacman -Syu && flatpak update"
 alias keychain:upgrade="sudo pacman -S archlinux-keyring"
 alias pacin="sudo pacman -S"
 alias v="nvim"
