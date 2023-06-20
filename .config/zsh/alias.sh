@@ -39,6 +39,9 @@ alias bt:on="bluetoothctl power on"
 alias bt:off="bluetoothctl power off"
 alias btctl="bluetoothctl"
 
+alias scr:rec="wf-recorder -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
+alias scr:cap="wf-recorder -g \"\$(slurp)\" -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
+
 alias nameserver:add="sudo sed -i '1s/^/# Custom Entry\nnameserver 127.0.0.1\n/' /etc/resolv.conf"
 alias dns:restart="sudo systemctl restart dnsmasq"
 

@@ -55,7 +55,7 @@ hi TelescopePromptTitle guibg=NONE ctermbg=NONE
 hi TelescopeResultsTitle guibg=NONE ctermbg=NONE
 
 let g:netrw_banner=0
-let b:copilot_enabled = v:true
+let g:codeium_enabled = v:true
 
 " tender colorscheme by https://github.com/jacoborus adopted for 16 bit
 "   base00 = '#32302f', -- dark grey

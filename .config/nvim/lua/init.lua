@@ -49,4 +49,5 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 -- custom function calls
 -- map("n", "<C-l>", ":lua print(vim.inspect())<Left><Left>")
 map("n", "cif", ":lua Func.replace_inside_function()<CR>o")
+map("n", "<C-x>", ":lua Func.execute_file()<CR>")
 

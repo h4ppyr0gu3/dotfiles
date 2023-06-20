@@ -1,8 +1,24 @@
+stag() {
+  branch=$(git branch --show-current)
+  git tag "staging/$branch" -f
+  git push origin "staging/$branch" -f
+}
+
+po() {
+  branch=$(git branch --show-current)
+  git pull origin $branch
+}
+
 acp() {
   git status
-  string=""
-  vared -p "files and directories to add: " string
-  array=("${(@s/ /)string}")
+  array=()
+  if [ $# -eq 0 ]; then
+    string=""
+    vared -p "files and directories to add: " string
+    array=("${(@s/ /)string}")
+  else
+    array=("$@")
+  fi
   for el in ${array[*]};
   do
     git add $el

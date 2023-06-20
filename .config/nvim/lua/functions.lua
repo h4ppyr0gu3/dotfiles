@@ -20,4 +20,20 @@ function M.replace_inside_function()
   vim.api.nvim_win_set_cursor(0, {start_line_nr, 0})
 end
 
+function M.execute_file()
+  local current_file = vim.api.nvim_buf_get_name(0)
+  local file_type = vim.bo.filetype
+
+  if file_type == 'lua' then
+    local output = vim.fn.system('lua ' .. current_file)
+    print(output)
+  elseif file_type == 'python' then
+    local output = vim.fn.system('python ' .. current_file)
+    print(output)
+  elseif file_type == 'ruby' then
+    local output = vim.fn.system('ruby ' .. current_file)
+    print(output)
+  end
+end
+
 return M

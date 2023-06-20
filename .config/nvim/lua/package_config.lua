@@ -49,12 +49,6 @@ nvim_lsp.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" }
 }
 
--- nvim_lsp["tailwindcss"].setup({
---   on_attach = on_attach,
---   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" },
---   cmd = { "tailwindcss-language-server", "--stdio" }
--- })
-
 require("typescript").setup({})
 
 for _, lsp in ipairs(servers) do
