@@ -56,3 +56,29 @@ m() {
   mpv $1 &
 }
 
+function _add_bundle_aliases {
+    bundle check 2> /dev/null 1> /dev/null;
+    local check_status=$?;
+
+    if [ $check_status -eq 0 ]; then
+        alias rails="bundle exec rails";
+        alias rspec="bundle exec rspec";
+        alias rubocop="bundle exec rubocop";
+        alias sidekiq="bundle exec sidekiq";
+    else
+        alias rails="rails";
+        alias rspec="rspec";
+        alias rubocop="rubocop";
+        alias sidekiq="sidekiq";
+    fi
+}
+
+_add_bundle_aliases
+
+if [[ -n "$chpwd_functions" ]]; then
+    if [[ ${chpwd_functions[(ie)_add_bundle_aliases]} -gt ${#chpwd_functions} ]]; then
+        chpwd_functions+=_add_bundle_aliases
+    fi
+else
+    chpwd_functions=( _add_bundle_aliases )
+fi

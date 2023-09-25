@@ -13,7 +13,7 @@ window:
     general: Alacritty
 
 scrolling:
-  history: 5000
+  history: 20000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).

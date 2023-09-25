@@ -1,6 +1,6 @@
 alias src="source ~/.zshrc"
 
-alias upgrade="sudo pacman -Syu && flatpak update"
+alias upgrade="flatpak update && sudo pacman -Syu"
 alias keychain:upgrade="sudo pacman -S archlinux-keyring"
 alias pacin="sudo pacman -S"
 alias v="nvim"
@@ -23,9 +23,15 @@ alias bex="bundle exec"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
 
 # Docker containers
-alias db:pgadmin="docker run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
-alias db:clf="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d docker.io/postgres:12"
+alias db:pgadmin="podman run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' docker.io/dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
+alias db:clf="podman run -p 15432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d docker.io/postgres:12"
+alias db:jal="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest"
 alias db:clf-prod="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-prod-db:/var/lib/postgresql/data -d postgres:12"
+alias db:mon="podman run --name mongodb -d -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=mongodb \
+  -e MONGO_INITDB_ROOT_PASSWORD=mongodb \
+  -v mongodb:/data/db\
+  mongodb/mongodb-community-server:6.0.7-ubuntu2204"
 
 
 # System resources
@@ -47,8 +53,8 @@ alias dns:restart="sudo systemctl restart dnsmasq"
 
 # Terminal quality of life
 alias ls="ls --color"
-alias la="exa -la"
-alias tree="exa --tree"
+alias la="eza -la"
+alias tree="eza --tree"
 alias co="git checkout"
 alias lg="lazygit"
 
@@ -80,6 +86,7 @@ alias funcedit="nvim $HOME/.config/zsh/functions.sh"
 alias aliasedit="nvim $HOME/.config/zsh/alias.sh"
 
 # Services
+alias services="sudo systemctl --type=service --state=running"
 alias start="sudo systemctl start"
 alias restart="sudo systemctl restart"
 alias stop="sudo systemctl stop"
