@@ -1,9 +1,12 @@
 alias src="source ~/.zshrc"
+alias srcenv="source ~/.env"
 
 alias upgrade="flatpak update && sudo pacman -Syu"
 alias keychain:upgrade="sudo pacman -S archlinux-keyring"
+alias keychain:reset="sudo rm -rf /etc/pacman.d/gnupg && sudo pacman-key --init && sudo pacman-key --populate"
 alias pacin="sudo pacman -S"
 alias v="nvim"
+alias localrb="asdf local ruby \$(cat .ruby-version)"
 
 # alias db:asdf="/home/david/.asdf/installs/postgres/13.0/bin/pg_ctl -D /home/david/.asdf/installs/postgres/13.0/data -l logfile start"
 alias mapp:start="\
@@ -26,6 +29,7 @@ alias db:reset="rails db:drop db:create db:migrate db:seed"
 alias db:pgadmin="podman run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' docker.io/dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
 alias db:clf="podman run -p 15432:5432 -e POSTGRES_PASSWORD=postgres -v clf-db:/var/lib/postgresql/data -d docker.io/postgres:12"
 alias db:jal="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest"
+alias db:ig="cd $HOME/ig/docker-images && docker-compose up postgres -d && cd -"
 alias db:clf-prod="docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v clf-prod-db:/var/lib/postgresql/data -d postgres:12"
 alias db:mon="podman run --name mongodb -d -p 27017:27017 \
   -e MONGO_INITDB_ROOT_USERNAME=mongodb \

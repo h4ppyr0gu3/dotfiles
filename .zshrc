@@ -35,4 +35,4 @@ source $ZSH/oh-my-zsh.sh
 source ~/.config/zsh/functions.sh
 source ~/.config/zsh/alias.sh
 
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
