@@ -9,16 +9,16 @@ set $right l
 set $term alacritty
 set $menu GTK_THEME=Adwaita:dark wofi -m -G --show drun -i -I -W 500
 
-set $workspace1 "1:"
-set $workspace2 "2:"
-set $workspace3 "3:"
-set $workspace4 "4:⚜"
-set $workspace5 "5:"
-set $workspace6 "6:"
-set $workspace7 "7:"
-set $workspace8 "8:"
-set $workspace9 "9:☘"
-set $workspace10 "10:☢"
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
 
 set $wallpaper /home/david/.config/wallpapers/zim_ripple.jpg
 set $lockscreen $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n 1)
@@ -33,8 +33,8 @@ font "TerminessTTF Nerd Font 12"
 output * bg $wallpaper fill
 
 # SET OUTPUT BEGIN
-output $display1 resolution 1366x768 position 256,1080
-output $display2 resolution 1920x1080 position 0,0
+output $display1 resolution 1366x768 position 323,1080
+output $display2 resolution 1920x1080 position 1689,768
 # SET OUTPUT END
 
 ### Idle configuration

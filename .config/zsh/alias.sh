@@ -45,9 +45,12 @@ alias wifi:on="nmcli radio wifi on"
 alias wifi:off="nmcli radio wifi off"
 alias wifi:connect="nmcli --ask dev wifi connect"
 alias wifi:scan="nmcli dev wifi list"
+
 alias bt:on="bluetoothctl power on"
 alias bt:off="bluetoothctl power off"
 alias btctl="bluetoothctl"
+alias con_cw="bluetoothctl connect 60:C5:E6:12:C7:9B"
+alias discon_cw="bluetoothctl disconnect 60:C5:E6:12:C7:9B"
 
 alias scr:rec="wf-recorder -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
 alias scr:cap="wf-recorder -g \"\$(slurp)\" -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
