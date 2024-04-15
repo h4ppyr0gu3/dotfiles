@@ -2,6 +2,8 @@ require("package_install")
 require("package_config")
 Func = require("functions")
 
+vim.opt.termguicolors = true
+
 -- key mapping
 vim.g.mapleader = " "
 
