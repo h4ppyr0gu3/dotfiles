@@ -34,7 +34,7 @@ output * bg $wallpaper fill
 
 # SET OUTPUT BEGIN
 output $display1 resolution 1366x768 position 323,1080
-output $display2 resolution 1920x1080 position 1689,768
+output $display2 resolution 1920x1080 position 1689,439
 # SET OUTPUT END
 
 ### Idle configuration

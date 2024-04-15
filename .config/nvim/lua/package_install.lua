@@ -23,7 +23,7 @@ require('packer').startup(function(use)
     "MunifTanjim/nui.nvim",
     "ThePrimeagen/harpoon",
     "mxw/vim-jsx",
-    "RRethy/nvim-base16",
+    "RRethy/base16-nvim",
     "tamago324/nlsp-settings.nvim",
     "jose-elias-alvarez/null-ls.nvim",
     "jose-elias-alvarez/typescript.nvim",

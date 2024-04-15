@@ -78,6 +78,8 @@ alias clf="\
 alias sys:logout="swaymsg exit"
 alias run="alacritty --working-directory . -t run -e "
 alias ram:clean="su -c sync; echo 1 | sudo tee /proc/sys/vm/drop_caches"
+alias about="neofetch"
+alias storage="df -h"
 
 alias kernel:unsigned="~/bin/kernel-unsigned"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
