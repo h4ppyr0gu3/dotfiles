@@ -36,6 +36,7 @@ require('packer').startup(function(use)
     "akinsho/nvim-bufferline.lua",
     "simrat39/symbols-outline.nvim",
     "themaxmarchuk/tailwindcss-colors.nvim",
+    "stevearc/oil.nvim",
   }
   -- AI code completion
   use { "Exafunction/codeium.vim", config = function ()
