@@ -82,7 +82,7 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 -- telescope setup
-require('telescope').setup { defaults = { file_ignore_patterns = { "node_modules", "deps", "_build" } } }
+require('telescope').setup { defaults = { file_ignore_patterns = { } } }
 
 -- harpoon setup
 local function set_keymap(mode, lhs, rhs, opts)
