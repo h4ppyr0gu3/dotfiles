@@ -37,5 +37,10 @@ source ~/.config/zsh/functions.sh
 source ~/.config/zsh/alias.sh
 
 export PATH="$HOME/go/bin:$PATH"
+export ANDROID_SDK_ROOT="/home/david/Android/Sdk"
+export ANDROID_HOME="/home/david/Android/Sdk"
+export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+
+# . "$HOME/.cargo/env"
 
 # eval "$(direnv hook zsh)"

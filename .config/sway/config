@@ -55,7 +55,7 @@ assign [class="firefox"]: workspace $workspace10
 assign [class="Slack"]: workspace $workspace9
 
 # ausotstart applications
-exec libinput-gestures-setup autostart start
+# exec libinput-gestures-setup autostart start
 exec tlp start
 exec mako 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
@@ -70,3 +70,8 @@ bindsym $mod+c exec clapboard
 bar {
   swaybar_command waybar
 }
+
+# gestures
+
+bindgesture swipe:right workspace prev_on_output
+bindgesture swipe:left workspace next_on_output
