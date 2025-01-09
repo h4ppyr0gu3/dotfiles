@@ -73,5 +73,10 @@ bar {
 
 # gestures
 
-bindgesture swipe:right workspace prev_on_output
-bindgesture swipe:left workspace next_on_output
+bindgesture swipe:3:right workspace prev_on_output
+bindgesture swipe:3:left workspace next_on_output
+bindgesture swipe:4:right move workspace to output right
+bindgesture swipe:4:left move workspace to output left
+
+
+
