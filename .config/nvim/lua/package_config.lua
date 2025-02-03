@@ -43,13 +43,11 @@ local on_attach = function(client, bufnr)
   -- require('tailwindcss-colors').buf_attach(bufnr)
 end
 
-nvim_lsp.tsserver.setup {
+nvim_lsp.ts_ls.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" }
 }
-
-require("typescript").setup({})
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
