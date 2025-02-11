@@ -72,6 +72,7 @@ require 'nvim-treesitter.configs'.setup {
   auto_install = true,
   highlight = {
     enable = true,
+    disable = { "slim" },
     additional_vim_regex_highlighting = true,
   },
   indent = {
