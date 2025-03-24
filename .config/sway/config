@@ -1,0 +1,85 @@
+### Variables
+# Logo key. Use Mod1 for Alt or Mod4 for super key.
+set $mod Mod4
+set $mod2 Mod1
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu GTK_THEME=Adwaita:dark wofi -m -G --show drun -i -I -W 500
+
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
+
+set $wallpaper /home/david/.config/wallpapers/zim_ripple.jpg
+set $lockscreen $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n 1)
+
+# SET DISPLAY BEGIN
+set $display1 DP-4
+set $display2 DP-2
+set $display3 eDP-1
+# SET DISPLAY END
+
+font "TerminessTTF Nerd Font 12"
+
+output * bg $wallpaper fill
+
+output $display3 scale 1.7
+
+# SET OUTPUT BEGIN
+output $display1 resolution 1920x1080 position 0,0
+output $display2 resolution 1920x1080 position 1920,0
+output $display3 resolution 2256x1504 position 1365,1080
+# SET OUTPUT END
+
+### Idle configuration
+exec swayidle -w \
+  timeout 300 'swaylock -f -e -i $lockscreen' \
+  timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -e -i $lockscreen'
+
+include /etc/sway/config-vars.d/*
+include ./workspace_mapping
+include ./input
+include ./window_attrs
+include ./keys
+include ./borders
+
+assign [class="firefoxdeveloperedition"]: workspace $workspace10
+assign [class="firefox"]: workspace $workspace10
+assign [class="Slack"]: workspace $workspace9
+
+# ausotstart applications
+exec tlp start
+exec mako 
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# clapboard
+# exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
+# exec wl-paste -p --watch bash -c "xargs -0 -I{} clapboard store {}"
+
+# bindsym $mod+c exec clapboard
+
+# Status Bar:
+bar {
+  swaybar_command waybar
+}
+
+# gestures
+
+bindgesture swipe:3:right workspace prev_on_output
+bindgesture swipe:3:left workspace next_on_output
+bindgesture swipe:4:right move workspace to output right
+bindgesture swipe:4:left move workspace to output left
+bindgesture swipe:4:down move workspace to output down
+bindgesture swipe:4:up move workspace to output up
+

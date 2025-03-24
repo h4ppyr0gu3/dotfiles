@@ -1,0 +1,13 @@
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [app_id="org.gnome.Calculator"] floating enable
+for_window [app_id="firefoxdeveloperedition" title="Picture-in-Picture"] floating enable
+for_window [app_id="org.gnome.Nautilus"] floating enable; sticky enable
+for_window [app_id="mpv"] floating enable
+for_window [class="Audacious"] floating enable
+for_window [app_id="anki"] floating enable
+for_window [class="vlc"] floating enable
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [window_role="^browser$"] inhibit_idle focus
+

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+declare -a file
+declare -a pipe
+
+function help {
+  echo "-h, --help : Shows help
+-f : Input a file"
+}
+
+file="false"
+
+if [[ $1 == "-f" ]]; then
+  file="true"
+elif [[ $1 == "-h" ]]; then
+  help 
+  exit
+elif [[ $1 == "--help" ]]; then
+  help
+  exit
+fi
+
+if [[ $file == "true" ]]; then
+  curl --data-binary "@$2" https://paste.rs
+else
+  curl --data-binary @- https://paste.rs
+fi
