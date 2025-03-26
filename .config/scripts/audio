@@ -3,7 +3,8 @@
 # Function to check if a sink matches a pattern and is available
 check_sink() {
     local pattern="$1"
-    pactl list sinks short | grep -i "$pattern" | grep -v "SUSPENDED" | head -n 1 | awk '{print $2}'
+    pactl list sinks short | grep -i "$pattern" | head -n 1 | awk '{print $2}'
+      # grep -v "SUSPENDED" | 
 }
 
 # Function to set the card profile and wait for sink availability
