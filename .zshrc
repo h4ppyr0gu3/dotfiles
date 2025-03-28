@@ -41,6 +41,8 @@ export ANDROID_SDK_ROOT="/home/david/Android/Sdk"
 export ANDROID_HOME="/home/david/Android/Sdk"
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
+export XDG_CURRENT_DESKTOP=sway
+
 # . "$HOME/.cargo/env"
 
 # eval "$(direnv hook zsh)"

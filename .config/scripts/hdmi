@@ -45,7 +45,8 @@ set_workspaces_variable () {
 
 set_output () {
   serial=$(echo $outputs | jq --argjson index $(($i-1)) '.[$index] | "\(.serial)"')
-  current_mode=$(echo $outputs | jq --argjson index $(($i-1)) '.[$index] | "resolution \(.modes[0].width)x\(.modes[0].height) position \(.rect.x),\(.rect.y)"')
+  current_mode=$(echo $outputs | jq --argjson index $(($i-1)) '.[$index] | "resolution \(.modes[0].width)x\(.modes[0].height) position \(.rect.x),\(.rect.y)"' | sort -k2,1 -t' ' -r)
+  echo $current_mode
   SET_OUTPUT+="output \$display$i $(echo $current_mode | sed 's/"//g')\n"
 }
 

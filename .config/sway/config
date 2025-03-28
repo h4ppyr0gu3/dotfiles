@@ -24,21 +24,21 @@ set $wallpaper /home/david/.config/wallpapers/zim_ripple.jpg
 set $lockscreen $HOME/.config/wallpapers/$(ls $HOME/.config/wallpapers | shuf -n 1)
 
 # SET DISPLAY BEGIN
-set $display1 eDP-1
-set $display2 DP-10
-set $display3 DP-9
+set $display1 DP-10
+set $display2 DP-9
+set $display3 eDP-1
 # SET DISPLAY END
 
 font "TerminessTTF Nerd Font 12"
 
 output * bg $wallpaper fill
 
-output $display1 scale 1.6
+output eDP-1 scale 1.6
 
 # SET OUTPUT BEGIN
-output $display1 resolution 2256x1504 position 1527,1080
-output $display2 resolution 1920x1080 position 304,0
-output $display3 resolution 1920x1080 position 2224,0
+output $display1 resolution 1920x1080 position 0,0
+output $display2 resolution 1920x1080 position 1920,0
+output $display3 resolution 2256x1504 position 1234,1080
 # SET OUTPUT END
 
 ### Idle configuration
@@ -61,7 +61,7 @@ assign [class="Slack"]: workspace $workspace9
 # ausotstart applications
 exec tlp start
 exec mako 
-# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # clapboard
 # exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
