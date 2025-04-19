@@ -38,13 +38,16 @@ output eDP-1 scale 1.6
 # SET OUTPUT BEGIN
 output $display1 resolution 1920x1080 position 0,0
 output $display2 resolution 1920x1080 position 1920,0
-output $display3 resolution 2256x1504 position 1234,1080
+output $display3 resolution 2256x1504 position 1274,1080
 # SET OUTPUT END
+output DP-11 resolution 1920x1080 position 1920,0
+output DP-12 resolution 1920x1080 position 0,0
 
 ### Idle configuration
 exec swayidle -w \
   timeout 300 'swaylock -f -e -i $lockscreen' \
-  timeout 310 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  timeout 310 'swaymsg "output * dpms off" & playerctl pause && systemctl hibernate' \
+  resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f -e -i $lockscreen'
 
 include /etc/sway/config-vars.d/*
@@ -62,6 +65,8 @@ assign [class="Slack"]: workspace $workspace9
 exec tlp start
 exec mako 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec export GTK_THEME=Adwaita:dark
+exec gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 
 # clapboard
 # exec wl-paste --watch bash -c "xargs -0 -I{} clapboard store {}"
@@ -75,7 +80,6 @@ bar {
 }
 
 # gestures
-
 bindgesture swipe:3:right workspace prev_on_output
 bindgesture swipe:3:left workspace next_on_output
 bindgesture swipe:4:right move workspace to output right
@@ -83,3 +87,5 @@ bindgesture swipe:4:left move workspace to output left
 bindgesture swipe:4:down move workspace to output down
 bindgesture swipe:4:up move workspace to output up
 
+# lid
+bindswitch --locked lid:toggle exec /home/david/.config/sway/lid.sh $lockscreen
