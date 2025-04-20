@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Configuration
+SERVER="david@ssh.h4ppyr0gu3.one"  # Replace with your server's SSH user and address
+REMOTE_PATH="/home/david/Music/"  # Replace with the path to your music on the server
+LOCAL_PATH="/home/david/Music/"  # Replace with the local destination path
+RSYNC_OPTIONS="-avz --progress"  # Standard options: archive, verbose, compress, show progress
+
+# Ensure local directory exists
+mkdir -p "$LOCAL_PATH"
+
+# Run rsync to sync music files
+# delete files on the server that are not on the local machine
+rsync $RSYNC_OPTIONS -e ssh "$LOCAL_PATH" "$SERVER:$REMOTE_PATH"
+
+rsync $RSYNC_OPTIONS -e ssh "$SERVER:$REMOTE_PATH" "$LOCAL_PATH"
+
+# Check if rsync was successful
+if [ $? -eq 0 ]; then
+    echo "Music sync completed successfully!"
+else
+    echo "Error occurred during sync. Check your connection or paths."
+fi

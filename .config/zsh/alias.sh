@@ -29,6 +29,7 @@ alias db:reset="rails db:drop db:create db:migrate db:seed"
 alias db:pgadmin="podman run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' docker.io/dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
 alias db:jal="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest"
 alias db:raw="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d docker.io/postgres:latest"
+alias db:vec="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v vec1-db:/var/lib/postgresql/data -d docker.io/ankane/pgvector"
 
 alias db:mon="podman run --name mongodb -d -p 27017:27017 \
   -e MONGO_INITDB_ROOT_USERNAME=mongodb \
