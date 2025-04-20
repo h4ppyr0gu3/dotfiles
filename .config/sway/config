@@ -45,10 +45,10 @@ output DP-12 resolution 1920x1080 position 0,0
 
 ### Idle configuration
 exec swayidle -w \
-  timeout 300 'swaylock -f -e -i $lockscreen' \
-  timeout 310 'swaymsg "output * dpms off" & playerctl pause && systemctl hibernate' \
+  timeout 300 'swaylock -f -i $lockscreen' \
+  timeout 310 'swaymsg "output * dpms off" & playerctl pause && systemctl suspend' \
   resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f -e -i $lockscreen'
+  before-sleep 'swaylock -f -i $lockscreen'
 
 include /etc/sway/config-vars.d/*
 include ./workspace_mapping
@@ -86,6 +86,3 @@ bindgesture swipe:4:right move workspace to output right
 bindgesture swipe:4:left move workspace to output left
 bindgesture swipe:4:down move workspace to output down
 bindgesture swipe:4:up move workspace to output up
-
-# lid
-bindswitch --locked lid:toggle exec /home/david/.config/sway/lid.sh $lockscreen

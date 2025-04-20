@@ -1,85 +1,114 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-# Function to check if a sink matches a pattern and is available
-check_sink() {
-    local pattern="$1"
-    pactl list sinks short | grep -i "$pattern" | head -n 1 | awk '{print $2}'
-      # grep -v "SUSPENDED" | 
-}
+require 'open3'
+require 'optparse'
 
-# Function to set the card profile and wait for sink availability
-set_card_profile() {
-    local card="$1"
-    local profile="$2"
-    echo "Setting card $card to profile $profile"
-    pactl set-card-profile "$card" "$profile"
-    sleep 1  # Wait for PipeWire to update sinks
-}
+class AudioSwitcher
+  def initialize(cards)
+    @cards = cards
+  end
 
-# Function to set the default sink and move all audio streams to it
-set_audio_sink() {
-    local sink="$1"
-    local name="$2"
-    if [ -n "$sink" ]; then
-        echo "Setting default audio output to $name ($sink)"
-        pactl set-default-sink "$sink"
-        
-        # Move all sink inputs to the new sink
-        sink_inputs=$(pactl list sink-inputs short | awk '{print $1}')
-        if [ -n "$sink_inputs" ]; then
-            for input in $sink_inputs; do
-                echo "Moving sink input $input to $name ($sink)"
-                pactl move-sink-input "$input" "$sink"
-            done
-        else
-            echo "No active audio streams to move."
-        fi
-        return 0
-    fi
-    return 1
-}
+  def find_preferred_card
+    # Priority: Bluetooth -> HDMI -> Analog
+    @cards.find { |card| card.name.match?(/bluez_card/) && card.profiles.any? { |p| p[:name] == card.active_profile && p[:available] == "yes" } } ||
+    @cards.find { |card| card.name.match?(/alsa_card/) && card.active_profile.start_with?("output:hdmi") && card.profiles.any? { |p| p[:name] == card.active_profile && p[:available] == "yes" } } ||
+    @cards.find { |card| card.name.match?(/alsa_card/) && card.active_profile.start_with?("output:analog") && card.profiles.any? { |p| p[:name] == card.active_profile && p[:available] == "yes" } }
+  end
 
-# Define cards
-RADEON_CARD="alsa_card.pci-0000_c1_00.1"    # Rembrandt Radeon (HDMI/DP)
-FAMILY_CARD="alsa_card.pci-0000_c1_00.6"    # Family card (laptop speakers, aux)
+  def set_audio(card, profile)
+    system("pactl set-card-profile #{card.name} #{profile}")
 
-# Define sink patterns
-AUX_PATTERN="alsa_output.pci-0000_c1_00.1.pro-output-7"       # Aux (assumed on Radeon, adjust if on family card)
-BLUETOOTH_PATTERN="bluez_output"                              # Generic Bluetooth pattern
-HDMI_DP_PATTERN="alsa_output.pci-0000_c1_00.1.hdmi"           # HDMI/DP on Radeon
-LAPTOP_PATTERN="alsa_output.pci-0000_c1_00.6.analog-stereo"   # Laptop speakers on family card
+    selected_sink = Open3.capture3("pactl list sinks short | grep #{card.name.gsub('card', 'output')} | awk '{print $2}'")[0]
 
-# Define profiles (based on your output and assumptions)
-AUX_PROFILE="output:analog-stereo"      # Adjust if aux has a specific profile
-HDMI_PROFILE="output:hdmi-surround71"   # From your output
-LAPTOP_PROFILE="output:analog-stereo"   # Standard for laptop speakers
+    system("pactl set-default-sink #{selected_sink}")
+  end
 
-if [ "$1" = "-r" ] || [ "$1" = "--reset" ]; then
-    echo "Resetting to family card (internal speakers/aux)"
-    FAMILY_SINK=$(check_sink "$LAPTOP_PATTERN")
-    if [ -n "$FAMILY_SINK" ]; then
-        set_card_profile "$FAMILY_CARD" "$FAMILY_PROFILE"
-        set_audio_sink "$FAMILY_SINK" "Internal Speakers/Aux"
+  def manual_selection
+    puts "Available audio cards and profiles:"
+    @cards.each_with_index do |card, i|
+      puts "\nCard #{i + 1}: #{card.readable_name}"
+      card.profiles.each_with_index do |profile, j|
+        puts "  #{j + 1}. #{profile[:name]} (Available: #{profile[:available]})"
+      end
+    end
+
+    loop do
+      print "\nSelect card number (1-#{@cards.length}): "
+      card_idx = gets.chomp.to_i - 1
+      return nil unless card_idx.between?(0, @cards.length - 1)
+
+      card = @cards[card_idx]
+      print "Select profile number (1-#{card.profiles.length}): "
+      profile_idx = gets.chomp.to_i - 1
+      return nil unless profile_idx.between?(0, card.profiles.length - 1)
+
+      profile = card.profiles[profile_idx]
+      if profile[:available] == "yes"
+        return [card, profile[:name]]
+      else
+        puts "Selected profile is not available. Please try again."
+      end
+    end
+  end
+
+  def run(manual: false)
+    if manual
+      selection = manual_selection
+      if selection
+        card, profile = selection
+        set_audio(card, profile)
+        puts "Set audio to card: #{card.name}, profile: #{profile}"
+      else
+        puts "Invalid selection or selection cancelled."
+      end
     else
-        echo "Family card sink not found. Listing available sinks:"
-        pactl list sinks short
-    fi
-    exit 0
-fi
+      card = find_preferred_card
+      if card
+        set_audio(card, card.active_profile)
+        puts "Set audio to card: #{card.name}, profile: #{card.active_profile}"
+      else
+        puts "No suitable audio card found."
+      end
+    end
+  end
+end
 
-BLUETOOTH_SINK=$(check_sink "$BLUETOOTH_PATTERN")
-if [ -n "$BLUETOOTH_SINK" ]; then
-    # Bluetooth uses its own card (bluez), no profile change needed
-    set_audio_sink "$BLUETOOTH_SINK" "Bluetooth"
-    exit 0
-fi
+# Parse command-line options
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: audio_switcher.rb [options]"
 
-HDMI_DP_SINK=$(check_sink "$HDMI_DP_PATTERN")
-if [ -n "$HDMI_DP_SINK" ]; then
-    set_card_profile "$RADEON_CARD" "$HDMI_PROFILE"
-    set_audio_sink "$HDMI_DP_SINK" "HDMI/DisplayPort"
-    exit 0
-fi
+  opts.on("-m", "--manual", "Manually select card and profile") do
+    options[:manual] = true
+  end
+end.parse!
 
-echo "No preferred audio outputs found. Listing available sinks:"
-pactl list sinks short
+cards = Open3.capture3("pactl list cards")
+cards = cards[0].split("\n\n")
+
+class Card
+  attr_reader :active_profile, :profiles, :name, :readable_name
+  def initialize(string)
+    lines = string.split("\n")
+    @name = lines[1].split(": ").last.strip
+    @readable_name = lines.find { |x| x.include?("device.description") }.split(" = ").last.strip
+    profile_line = lines.find { |x| x.include?("Profile") }
+    profile_line_index = lines.index(profile_line)
+    active_profile_line = lines.find { |x| x.include?("Active Profile") }
+    active_profile_line_index = lines.index(active_profile_line)
+    profiles = lines[profile_line_index + 1..active_profile_line_index - 1]
+    parsed_profiles = profiles.map do |profile|
+      name = profile.split(": ").first.strip
+      available = profile.split(": ").last.strip.tr(')', '')
+      { name: name, available: available }
+    end
+
+    @active_profile = active_profile_line.split(": ").last.strip
+    @profiles = parsed_profiles
+  end
+end
+
+real_cards = cards.map { |card| Card.new(card) }
+
+switcher = AudioSwitcher.new(real_cards)
+switcher.run(manual: options[:manual])

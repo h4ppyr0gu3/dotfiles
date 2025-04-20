@@ -43,6 +43,10 @@ export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 export XDG_CURRENT_DESKTOP=sway
 
+if [ -f "$HOME/.env" ]; then
+  source "$HOME/.env"
+fi
+
 # . "$HOME/.cargo/env"
 
 # eval "$(direnv hook zsh)"
