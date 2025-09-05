@@ -72,6 +72,7 @@ require("pckr").add{
           -- -- A mapping of filetype to true or false, to enable virtual text.
           filetypes = {
             slim = false,
+            txt = false
           },
           -- -- Whether to enable virtual text of not for filetypes not specifically listed above.
           -- default_filetype_enabled = true,

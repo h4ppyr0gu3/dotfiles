@@ -26,16 +26,72 @@ alias bex="bundle exec"
 alias db:reset="rails db:drop db:create db:migrate db:seed"
 
 # Docker containers
-alias db:pgadmin="podman run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' docker.io/dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
-alias db:jal="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest"
-alias db:raw="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d docker.io/postgres:latest"
-alias db:vec="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v vec1-db:/var/lib/postgresql/data -d docker.io/ankane/pgvector"
+# General purpose container manager
+run_or_start() {
+    local container_name="$1"
+    shift  # Remove first argument, rest are the run command args
+    
+    if podman ps -a --format "{{.Names}}" | grep -q "^${container_name}$"; then
+        echo "Starting existing container: $container_name"
+        podman start "$container_name"
+    else
+        echo "Creating new container: $container_name"
+        podman run --name "$container_name" "$@"
+    fi
+}
 
-alias db:mon="podman run --name mongodb -d -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=mongodb \
-  -e MONGO_INITDB_ROOT_PASSWORD=mongodb \
-  -v mongodb:/data/db\
-  mongodb/mongodb-community-server:6.0.7-ubuntu2204"
+# Database containers
+db_pgadmin() {
+    run_or_start "pgadmin" \
+        -p 8080:80 \
+        -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' \
+        -e 'PGADMIN_LISTEN_PORT=8000' \
+        -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' \
+        -d --network='host' \
+        docker.io/dpage/pgadmin4:latest
+    
+    # Open browser after container starts
+    sleep 2 && firefox-developer-edition --new-tab http://localhost:8000 &
+}
+
+db_jal() {
+  run_or_start "jal-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest
+}
+
+db_raw() {
+  run_or_start "raw-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d docker.io/postgres:latest
+}
+
+db_vec() {
+  run_or_start "vec-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v vec1-db:/var/lib/postgresql/data -d docker.io/ankane/pgvector
+}
+
+db_neo4j() {
+  run_or_start "neo4j-db" -p 7687:7687 -p 7474:7474 -v neo4j:/data -d docker.io/neo4j
+}
+
+db_mon() {
+  run_or_start "mongodb" -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongodb -e MONGO_INITDB_ROOT_PASSWORD=mongodb \
+    -v mongodb:/data/db mongodb/mongodb-community-server:6.0.7-ubuntu2204
+}
+
+alias db:jal="db_jal"
+alias db:raw="db_raw"
+alias db:vec="db_vec"
+alias db:neo4j="db_neo4j"
+alias db:mon="db_mon"
+alias db:pgadmin="db_pgadmin"
+
+# alias db:pgadmin="podman run -p 8080:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_LISTEN_PORT=8000' -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' -d --network='host' docker.io/dpage/pgadmin4:latest && firefox-developer-edition --new-tab http://localhost:8000"
+# alias db:jal="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest"
+# alias db:raw="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d docker.io/postgres:latest"
+# alias db:vec="podman run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v vec1-db:/var/lib/postgresql/data -d docker.io/ankane/pgvector"
+# alias db:neo4j="podman run -p 7687:7687 -p 7474:7474 -v neo4j:/data -d docker.io/neo4j"
+# alias db:mon="podman run --name mongodb -d -p 27017:27017 \
+#   -e MONGO_INITDB_ROOT_USERNAME=mongodb \
+#   -e MONGO_INITDB_ROOT_PASSWORD=mongodb \
+#   -v mongodb:/data/db\
+#   mongodb/mongodb-community-server:6.0.7-ubuntu2204"
 
 # System resources
 alias hdd:status="sudo hdparm -C /dev/sda"
@@ -51,9 +107,13 @@ alias btctl="bluetoothctl"
 alias con_cw="bluetoothctl connect 60:C5:E6:12:C7:9B"
 alias con_rb="bluetoothctl connect 33:70:B0:A0:D1:FD"
 alias con_jbl="bluetoothctl connect F8:5C:7E:A5:59:0A"
+alias con_jbl6="bluetoothctl connect 20:18:5B:A4:08:05"
+alias con_buds="bluetoothctl connect E4:92:82:7A:E7:01"
 alias discon_cw="bluetoothctl disconnect 60:C5:E6:12:C7:9B"
 alias discon_rb="bluetoothctl disconnect 33:70:B0:A0:D1:FD"
 alias discon_jbl="bluetoothctl disconnect F8:5C:7E:A5:59:0A"
+alias discon_buds="bluetoothctl disconnect E4:92:82:7A:E7:01"
+alias discon_jbl6="bluetoothctl disconnect 20:18:5B:A4:08:05"
 
 alias scr:rec="wf-recorder -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
 alias scr:cap="wf-recorder -g \"\$(slurp)\" -f ~/screenshots/\$(date +%Y-%B-%d_%Hh%Mm%Ss).mp4"
@@ -109,7 +169,16 @@ alias enable="sudo systemctl enable"
 alias disable="sudo systemctl disable"
 
 # Python
-alias pysrc="source ./bin/activate"
+alias pysrc="source .venv/bin/activate"
+function pysrc:create() {
+    if [[ -n "$1" ]]; then
+        python3 -m venv .venv --prompt "$1"
+    else
+        python3 -m venv .venv
+    fi
+
+    pysrc
+}
 
 # Ethereum
 ETHEREUM_DATA_DIR=/home/david/.eth

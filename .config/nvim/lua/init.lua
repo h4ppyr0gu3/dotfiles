@@ -1,3 +1,6 @@
+local home = os.getenv("HOME")
+vim.cmd('silent !source ' .. home .. '/.zshrc')
+
 require("package_install")
 require("package_config")
 Func = require("functions")

@@ -13,7 +13,7 @@ mkdir -p "$LOCAL_PATH"
 # delete files on the server that are not on the local machine
 rsync $RSYNC_OPTIONS -e ssh "$LOCAL_PATH" "$SERVER:$REMOTE_PATH"
 
-rsync $RSYNC_OPTIONS -e ssh "$SERVER:$REMOTE_PATH" "$LOCAL_PATH"
+# rsync $RSYNC_OPTIONS -e ssh "$SERVER:$REMOTE_PATH" "$LOCAL_PATH"
 
 # Check if rsync was successful
 if [ $? -eq 0 ]; then

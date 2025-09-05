@@ -1,7 +1,6 @@
 ### Variables
 # Logo key. Use Mod1 for Alt or Mod4 for super key.
 set $mod Mod4
-set $mod2 Mod1
 set $left h
 set $down j
 set $up k
@@ -33,7 +32,7 @@ font "TerminessTTF Nerd Font 12"
 
 output * bg $wallpaper fill
 
-output eDP-1 scale 1.6
+output eDP-1 scale 1.4
 
 # SET OUTPUT BEGIN
 output $display1 resolution 1920x1080 position 0,0
@@ -62,10 +61,14 @@ assign [class="firefox"]: workspace $workspace10
 assign [class="Slack"]: workspace $workspace9
 
 # ausotstart applications
-exec tlp start
 exec mako 
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec export GTK_THEME=Adwaita:dark
+exec export MOZ_ENABLE_WAYLAND=1
+exec export QT_QPA_PLATFORM=wayland
+exec export GTK_BACKEND=wayland
+exec export ELECTRON_OZONE_PLATFORM_HINT=wayland
+exec export PLASMA_USE_QT_SCALING=1
 exec gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 
 # clapboard

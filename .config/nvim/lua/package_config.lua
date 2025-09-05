@@ -1,13 +1,13 @@
 -- mason and lsp setup
-require("mason").setup()
+-- require("mason").setup()
 
 local servers = {
   "solargraph"
 }
 
-require("mason-lspconfig").setup({
-  ensure_installed = servers
-})
+-- require("mason-lspconfig").setup({
+--   ensure_installed = servers
+-- })
 
 -- require("tailwindcss-colors").setup()
 
@@ -42,6 +42,23 @@ local on_attach = function(client, bufnr)
 
   -- require('tailwindcss-colors').buf_attach(bufnr)
 end
+
+local util = require 'lspconfig.util'
+
+nvim_lsp.solargraph.setup({
+  -- cmd = { "/home/david/.asdf/shims/bundle", "exec", "/home/david/.asdf/shims/solargraph", "stdio" },
+  on_attach = on_attach,
+  -- root_dir = nvim_lsp.util.root_pattern("Gemfile"),
+  cmd = { 'solargraph', 'stdio' },
+    settings = {
+      solargraph = {
+        diagnostics = true,
+      },
+    },
+    init_options = { formatting = true },
+    filetypes = { 'ruby' },
+    root_dir = util.root_pattern('Gemfile', '.git'),
+})
 
 nvim_lsp.ts_ls.setup {
   on_attach = on_attach,
