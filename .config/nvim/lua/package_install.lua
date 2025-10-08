@@ -53,7 +53,7 @@ require("pckr").add{
   "simrat39/symbols-outline.nvim";
   -- "themaxmarchuk/tailwindcss-colors.nvim";
   "stevearc/oil.nvim";
-  { "Exafunction/codeium.nvim",
+  { "Exafunction/windsurf.nvim",
     requires = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",

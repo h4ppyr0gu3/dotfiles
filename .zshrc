@@ -40,6 +40,8 @@ export PATH="$HOME/go/bin:$PATH"
 export ANDROID_SDK_ROOT="/home/david/Android/Sdk"
 export ANDROID_HOME="/home/david/Android/Sdk"
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+export PATH="$HOME/.nix-profile/bin:$PATH"
+export PATH="/home/david/ardupilot/Tools/autotest:$PATH"
 
 export XDG_CURRENT_DESKTOP=sway
 

@@ -54,15 +54,22 @@ db_pgadmin() {
     sleep 2 && firefox-developer-edition --new-tab http://localhost:8000 &
 }
 
+kill_postgres() {
+  if podman ps | grep -q 5432; then; podman stop $(podman ps | grep 5432 | awk '{print $1}'); fi
+}
+
 db_jal() {
+  kill_postgres
   run_or_start "jal-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v jal-db:/var/lib/postgresql/data -d docker.io/postgres:latest
 }
 
 db_raw() {
+  kill_postgres
   run_or_start "raw-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d docker.io/postgres:latest
 }
 
 db_vec() {
+  kill_postgres
   run_or_start "vec-db" -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v vec1-db:/var/lib/postgresql/data -d docker.io/ankane/pgvector
 }
 
