@@ -53,6 +53,14 @@ require("pckr").add{
   "simrat39/symbols-outline.nvim";
   -- "themaxmarchuk/tailwindcss-colors.nvim";
   "stevearc/oil.nvim";
+  {
+    "salkin-mada/openscad.nvim",
+    config = function()
+      vim.g.openscad_load_snippets = true
+      require("openscad")
+    end,
+    dependencies = { "L3MON4D3/LuaSnip", "junegunn/fzf.vim" },
+  },
   { "Exafunction/windsurf.nvim",
     requires = {
       "nvim-lua/plenary.nvim",

@@ -48,14 +48,6 @@ cfgacp() {
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME push origin master
 }
 
-z() {
-  zathura $1 &
-}
-
-m() {
-  mpv $1 &
-}
-
 function _add_bundle_aliases {
     bundle check 2> /dev/null 1> /dev/null;
     local check_status=$?;

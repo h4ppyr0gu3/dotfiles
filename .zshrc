@@ -20,7 +20,7 @@ export GOPATH=$HOME/go
 # ZSH SPECIFIC
 
 ZSH_THEME="robbyrussell"
-plugins=( fzf git zsh-autosuggestions sudo copyfile asdf )
+plugins=( fzf git zsh-autosuggestions sudo copyfile asdf zsh-z )
 
 zstyle ':omz:update' frequency 10
 export ZSH="$HOME/.oh-my-zsh"
@@ -43,6 +43,8 @@ export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 export PATH="$HOME/.nix-profile/bin:$PATH"
 export PATH="/home/david/ardupilot/Tools/autotest:$PATH"
 
+export PATH=${PATH}:/opt/xtensa-lx106-elf-gcc/bin
+
 export XDG_CURRENT_DESKTOP=sway
 
 if [ -f "$HOME/.env" ]; then
@@ -58,3 +60,10 @@ if [ -f '/home/david/google-cloud-sdk/path.zsh.inc' ]; then . '/home/david/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/david/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/david/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# [[ -s /home/david/.cache/yay/autojump/pkg/autojump/etc/profile.d/autojump.sh ]] && source /home/david/.cache/yay/autojump/pkg/autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
+
+
