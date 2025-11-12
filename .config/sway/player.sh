@@ -3,7 +3,31 @@
 LAST_PLAYER_FILE="$HOME/.last-player"
 
 selected_player() {
-  playerctl --all-players --format '{{playerName}} {{status}}' status | grep Playing | awk '{print $1}' | head -n 1
+  EXCLUDE_REGEX="JBL|bluez|a2dp|headset"
+
+  for player in $(playerctl --list-all); do
+    if [[ "$player" =~ $EXCLUDE_REGEX ]]; then
+      continue
+    fi
+    status=$(playerctl --player="$player" status 2>/dev/null)
+    if [[ "$status" == "Playing" ]]; then
+      echo "$player"
+      return
+    fi
+  done
+
+  for player in $(playerctl --list-all); do
+    if [[ "$player" =~ $EXCLUDE_REGEX ]]; then
+      continue
+    fi
+    status=$(playerctl --player="$player" status 2>/dev/null)
+    if [[ "$status" == "Paused" ]]; then
+      echo "$player"
+      return
+    fi
+  done
+
+  return 1
 }
 
 
