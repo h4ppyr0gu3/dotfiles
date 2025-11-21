@@ -89,3 +89,5 @@ bindgesture swipe:4:right move workspace to output right
 bindgesture swipe:4:left move workspace to output left
 bindgesture swipe:4:down move workspace to output down
 bindgesture swipe:4:up move workspace to output up
+
+mouse_warping container
